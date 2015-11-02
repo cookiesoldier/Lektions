@@ -2,6 +2,7 @@ package com.example.martinvieth.lektions;
 
 import android.app.Activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -9,7 +10,6 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.webkit.WebView;
 import android.widget.Button;
-import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
 ;
@@ -19,6 +19,7 @@ public class MainActivity extends Activity implements OnClickListener {
     Button btnOne;
     Button btnSmall;
     Button search;
+    Button vejledningBtn;
 
     TextView textTopLeft;
     TextView textTop;
@@ -34,25 +35,28 @@ public class MainActivity extends Activity implements OnClickListener {
 
 
         btnOne = (Button) findViewById(R.id.buttonOne);
-
-
         btnSmall = (Button) findViewById(R.id.buttonSmall);
+        vejledningBtn = (Button) findViewById(R.id.btnVejl);
         textTopLeft = (TextView) findViewById(R.id.textViewLeftTop);
 
         textTop = (TextView) findViewById(R.id.Overskrift);
-
         editTextOne = (EditText) findViewById(R.id.editTextOne);
 
         btnOne.setOnClickListener(this);
         btnSmall.setOnClickListener(this);
+        vejledningBtn.setOnClickListener(this);
         //Browser stuff
         browserLink = (EditText) findViewById(R.id.editTextBrowserLink);
         search = (Button) findViewById(R.id.buttonSearch);
         webView = (WebView) findViewById(R.id.webViewFront);
 
         search.setOnClickListener(this);
-
-
+        findViewById(R.id.btnVejl).setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this, Lektion2Activity.class));
+            }
+        });
 
 
     }
@@ -68,6 +72,8 @@ public class MainActivity extends Activity implements OnClickListener {
             String stuff = browserLink.getText().toString();
             webView.loadUrl(stuff);
 
+
+        }else if(v == vejledningBtn){
 
         }
 
