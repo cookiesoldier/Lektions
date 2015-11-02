@@ -83,4 +83,23 @@
         android:layout_below="@+id/textView3"
         android:layout_centerHorizontal="true"
         android:textSize="20dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Brugte bogstaver"
+        android:id="@+id/textView4"
+        android:layout_below="@+id/btnGuess"
+        android:layout_toEndOf="@+id/btnGuess"
+        android:layout_alignStart="@+id/twBesked" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:id="@+id/tvUsedLetters"
+        android:layout_below="@+id/textView4"
+        android:layout_alignStart="@+id/textView4" />
+
 </RelativeLayout>

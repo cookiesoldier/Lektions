@@ -21,6 +21,7 @@ public class galgeSpilActivity extends Activity  implements OnClickListener {
     TextView textView2;
     Galgelogik galgelogik;
     ImageView imgGalge;
+    TextView tvUsedLetters;
 
     TextView twHiddenWord;
 
@@ -45,6 +46,7 @@ public class galgeSpilActivity extends Activity  implements OnClickListener {
         twHiddenWord = (TextView) findViewById(R.id.twHiddenWord);
         textView = (TextView) findViewById(R.id.textView);
         textView2 = (TextView) findViewById(R.id.textView2);
+        tvUsedLetters = (TextView) findViewById(R.id.tvUsedLetters);
 
         //Img for the game
         imgGalge = (ImageView) findViewById(R.id.imgGalge);
@@ -75,6 +77,7 @@ public class galgeSpilActivity extends Activity  implements OnClickListener {
             textView2.setText("Gæt ordet, skriv et bogstav og tryk på knappen");
             btnGuess.setText("Gæt");
             twHiddenWord.setText("");
+            tvUsedLetters.setText("");
             imgGalge.setImageResource(R.mipmap.galge);
 
         }
@@ -101,7 +104,7 @@ public class galgeSpilActivity extends Activity  implements OnClickListener {
 
         }
         twHiddenWord.setText(galgelogik.getSynligtOrd());
-
+        tvUsedLetters.setText(galgelogik.getBrugteBogstaver().toString());
         if(galgelogik.erSpilletSlut()){
             textView2.setText("Vil du spille igen?");
             btnGuess.setText("Nyt Spil");
