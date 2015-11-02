@@ -10,46 +10,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Første App"
+        android:text="Galge Spillet"
         android:id="@+id/Overskrift"
         android:layout_centerHorizontal="true" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Tryk på knappen"
-        android:id="@+id/textViewLeftTop"
-        android:layout_below="@+id/editTextOne"
-        android:layout_alignStart="@+id/buttonSmall" />
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Skift Navn"
-        android:id="@+id/buttonOne"
-        android:layout_below="@+id/textViewLeftTop"
-        android:layout_alignStart="@+id/editTextOne" />
-
-    <Button
-        style="?android:attr/buttonStyleSmall"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Også mig"
-        android:id="@+id/buttonSmall"
-        android:layout_below="@+id/buttonOne"
-        android:layout_alignParentStart="true" />
-
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:inputType="textPersonName"
-        android:text="Name"
-        android:ems="10"
-        android:id="@+id/editTextOne"
-        android:layout_below="@+id/Overskrift"
-        android:layout_alignParentStart="true"
-        android:layout_marginTop="54dp" />
 
     <ImageView
         android:layout_width="wrap_content"
@@ -62,43 +25,18 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Vejledning"
-        android:id="@+id/btnVejl"
-        android:layout_alignParentBottom="true"
-        android:layout_toStartOf="@+id/imageView" />
+        android:text="Nyt Spil"
+        android:id="@+id/btnNewGame"
+        android:layout_below="@+id/imageView"
+        android:layout_alignEnd="@+id/Overskrift"
+        android:layout_marginTop="42dp" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Indstillinger"
         android:id="@+id/btnInstil"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentEnd="true" />
-
-    <WebView
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:id="@+id/webViewFront"
-        android:layout_above="@+id/btnVejl"
-        android:layout_marginBottom="66dp"
-        android:layout_alignParentStart="true"
-        android:layout_alignEnd="@+id/btnInstil" />
-
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/editTextBrowserLink"
-        android:layout_above="@+id/webViewFront"
-        android:layout_centerHorizontal="true"
-        android:text="BrowserLink" />
-
-    <Button
-        style="?android:attr/buttonStyleSmall"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Search"
-        android:id="@+id/buttonSearch"
-        android:layout_above="@+id/btnVejl"
+        android:layout_centerVertical="true"
         android:layout_centerHorizontal="true" />
 
 </RelativeLayout>

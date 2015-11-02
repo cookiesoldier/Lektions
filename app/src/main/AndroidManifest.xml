@@ -17,12 +17,8 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".Lektion2Activity"
-            android:label="@string/title_activity_lektion2" >
-        </activity>
-        <activity
-            android:name=".Spillet_Act"
-            android:label="@string/title_activity_spillet_" >
+            android:name=".galgeSpilActivity"
+            android:label="@string/title_activity_galge_spil" >
         </activity>
     </application>
 
