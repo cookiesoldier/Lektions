@@ -52,6 +52,9 @@ public class Galgelogik {
         return spilletErTabt || spilletErVundet;
     }
 
+    public ArrayList<String> getMuligeOrd(){
+        return muligeOrd;
+    }
 
     public Galgelogik() {
         muligeOrd.add("bil");

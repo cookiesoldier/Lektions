@@ -19,10 +19,9 @@ public class galgeSpilActivity extends Activity  implements OnClickListener {
     TextView twBesked;
     TextView textView;
     TextView textView2;
-    Galgelogik galgelogik;
+    public static Galgelogik galgelogik;
     ImageView imgGalge;
     TextView tvUsedLetters;
-
     TextView twHiddenWord;
 
     @Override
@@ -50,10 +49,8 @@ public class galgeSpilActivity extends Activity  implements OnClickListener {
 
         //Img for the game
         imgGalge = (ImageView) findViewById(R.id.imgGalge);
-
-
-
     }
+
     public void onClick(View v) {
         if(v==btnBack){
             startActivity(new Intent(galgeSpilActivity.this, MainActivity.class));
@@ -83,37 +80,37 @@ public class galgeSpilActivity extends Activity  implements OnClickListener {
         }
     }
 
-    public void galgeGraphicsOpgadeter(){
+    public void galgeGraphicsOpgadeter() {
         System.out.println(galgelogik.getAntalForkerteBogstaver());
-        if(galgelogik.getAntalForkerteBogstaver()==1){
-                imgGalge.setImageResource(R.mipmap.forkert1);
-        }else  if(galgelogik.getAntalForkerteBogstaver()==2){
+        if (galgelogik.getAntalForkerteBogstaver() == 1) {
+            imgGalge.setImageResource(R.mipmap.forkert1);
+        } else if (galgelogik.getAntalForkerteBogstaver() == 2) {
             imgGalge.setImageResource(R.mipmap.forkert2);
 
-        }else  if(galgelogik.getAntalForkerteBogstaver()==3){
+        } else if (galgelogik.getAntalForkerteBogstaver() == 3) {
             imgGalge.setImageResource(R.mipmap.forkert3);
 
-        }else  if(galgelogik.getAntalForkerteBogstaver()==4){
+        } else if (galgelogik.getAntalForkerteBogstaver() == 4) {
             imgGalge.setImageResource(R.mipmap.forkert4);
 
-        }else  if(galgelogik.getAntalForkerteBogstaver()==5){
+        } else if (galgelogik.getAntalForkerteBogstaver() == 5) {
             imgGalge.setImageResource(R.mipmap.forkert5);
 
-        }else  if(galgelogik.getAntalForkerteBogstaver()==6){
+        } else if (galgelogik.getAntalForkerteBogstaver() == 6) {
             imgGalge.setImageResource(R.mipmap.forkert6);
 
         }
         twHiddenWord.setText(galgelogik.getSynligtOrd());
         tvUsedLetters.setText(galgelogik.getBrugteBogstaver().toString());
-        if(galgelogik.erSpilletSlut()){
+        if (galgelogik.erSpilletSlut()) {
             textView2.setText("Vil du spille igen?");
             btnGuess.setText("Nyt Spil");
 
 
-            if(galgelogik.erSpilletVundet()){
+            if (galgelogik.erSpilletVundet()) {
                 textView.setText("Du vandt! woho!");
 
-            }else{
+            } else {
                 textView.setText("Du tabte! Boooh!");
                 twHiddenWord.setText(galgelogik.getOrdet());
             }
