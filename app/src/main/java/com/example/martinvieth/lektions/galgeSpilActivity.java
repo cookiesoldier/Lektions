@@ -15,6 +15,7 @@ public class galgeSpilActivity extends Activity  implements OnClickListener {
 
     Button btnBack;
     Button btnGuess;
+    Button btnMore;
     EditText eTGuess;
     TextView twBesked;
     TextView textView;
@@ -33,8 +34,10 @@ public class galgeSpilActivity extends Activity  implements OnClickListener {
         //buttons
         btnBack = (Button) findViewById(R.id.btnBack);
         btnBack.setOnClickListener(this);
-        btnGuess =(Button) findViewById(R.id.btnGuess);
+        btnGuess = (Button) findViewById(R.id.btnGuess);
         btnGuess.setOnClickListener(this);
+        btnMore = (Button) findViewById(R.id.btnMore);
+        btnMore.setOnClickListener(this);
 
         //text box for guess
         eTGuess = (EditText) findViewById(R.id.eTGuess);
@@ -52,9 +55,11 @@ public class galgeSpilActivity extends Activity  implements OnClickListener {
     }
 
     public void onClick(View v) {
+        if(v==btnMore){
+            startActivity(new Intent(galgeSpilActivity.this, listActivity.class));
+        }
         if(v==btnBack){
             startActivity(new Intent(galgeSpilActivity.this, MainActivity.class));
-
         }else if(v ==btnGuess && !galgelogik.erSpilletSlut()){
             System.out.println("Der gættes");
             if(eTGuess.length() > 1){

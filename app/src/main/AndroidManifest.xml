@@ -20,6 +20,8 @@
             android:name=".galgeSpilActivity"
             android:label="@string/title_activity_galge_spil" >
         </activity>
+        <activity android:name=".listActivity" >
+        </activity>
     </application>
 
 </manifest>
