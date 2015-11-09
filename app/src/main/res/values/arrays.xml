@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="galge_imgs">
+        <item>@mipmap/galge</item>
+        <item>@mipmap/forkert1</item>
+        <item>@mipmap/forkert2</item>
+        <item>@mipmap/forkert3</item>
+        <item>@mipmap/forkert4</item>
+        <item>@mipmap/forkert5</item>
+        <item>@mipmap/forkert6</item>
+    </string-array>
+</resources>

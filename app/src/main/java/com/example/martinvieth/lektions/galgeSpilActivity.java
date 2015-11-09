@@ -39,7 +39,7 @@ public class galgeSpilActivity extends Activity  implements OnClickListener {
         //text box for guess
         eTGuess = (EditText) findViewById(R.id.eTGuess);
 
-//
+////
         //Text view for error or messages
         twBesked = (TextView) findViewById(R.id.twBesked);
         twHiddenWord = (TextView) findViewById(R.id.twHiddenWord);
