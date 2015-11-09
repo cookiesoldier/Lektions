@@ -14,17 +14,12 @@ import android.widget.TextView;
 
 public class galgeSpilActivity extends Activity  implements OnClickListener {
 
-    Button btnBack;
-    Button btnGuess;
-    Button btnMore;
+    Button btnBack,btnGuess,btnMore;
     EditText eTGuess;
-    TextView twBesked;
-    TextView textView;
-    TextView textView2;
+    TextView twBesked,textView,textView2;
     public static Galgelogik galgelogik;
     ImageView imgGalge;
-    TextView tvUsedLetters;
-    TextView twHiddenWord;
+    TextView tvUsedLetters, twHiddenWord;
     TypedArray images;
 
     @Override
@@ -59,6 +54,7 @@ public class galgeSpilActivity extends Activity  implements OnClickListener {
 
         //Set text for Textview
         textView2.setText("Gæt ordet, skriv et bogstav og tryk på knappen");
+        tvUsedLetters.setText("Brugte Bogstaver");
     }
 
     public void onClick(View v) {
@@ -88,7 +84,6 @@ public class galgeSpilActivity extends Activity  implements OnClickListener {
             btnGuess.setText("Gæt");
             twHiddenWord.setText("");
             tvUsedLetters.setText("");
-            imgGalge.setImageResource(R.mipmap.galge);
 
         }
         eTGuess.setText("");
@@ -96,7 +91,7 @@ public class galgeSpilActivity extends Activity  implements OnClickListener {
 
     public void galgeGraphicsOpgadeter() {
         twHiddenWord.setText(galgelogik.getSynligtOrd());
-        tvUsedLetters.setText(galgelogik.getBrugteBogstaver().toString());
+        tvUsedLetters.setText("Brugte Bogstaver"+ galgelogik.getBrugteBogstaver().toString());
         if (galgelogik.erSpilletSlut()) {
             textView2.setText("Vil du spille igen?");
             btnGuess.setText("Nyt Spil");

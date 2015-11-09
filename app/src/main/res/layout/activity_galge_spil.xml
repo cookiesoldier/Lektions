@@ -1,113 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
-    android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:layout_height="match_parent"
     tools:context="com.example.martinvieth.lektions.galgeSpilActivity">
 
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/imgGalge"
-        android:src="@mipmap/galge"
-        android:layout_below="@+id/textView3"
-        android:layout_toEndOf="@+id/textView" />
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="Velkommen til galge spillet!"
+            android:id="@+id/textView"
+            android:textSize="15dp"
+            android:layout_alignParentTop="true"
+           android:layout_centerInParent="true" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/imgGalge"
+            android:src="@mipmap/galge"
+            android:layout_below="@id/textView"
+            android:layout_centerInParent="true" />
 
     <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Velkommen til galge spillet!"
-        android:id="@+id/textView"
-        android:textSize="15dp"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true" />
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="Gæt ordet, skriv et bogstav og tryk på knappen"
+            android:id="@+id/textView2"
+            android:layout_below="@id/imgGalge"
+            android:layout_centerInParent="true"
+        />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Gæt ordet, skriv et bogstav og tryk på knappen"
-        android:id="@+id/textView2"
-        android:layout_below="@+id/imgGalge"
-        android:layout_alignParentStart="true" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:id="@+id/twHiddenWord"
+            android:textSize="20dp"
+            android:layout_below="@id/textView2"
+            android:layout_centerInParent="true"
+        />
 
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/eTGuess"
-        android:layout_alignEnd="@+id/textView2"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/textView2" />
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/eTGuess" 
+            android:layout_below="@id/twHiddenWord"
+            android:layout_centerInParent="true"
+            />
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Gæt"
-        android:id="@+id/btnGuess"
-        android:layout_below="@+id/eTGuess"
-        android:layout_centerHorizontal="true" />
 
-    <Button
-        style="?android:attr/buttonStyleSmall"
-        android:layout_width="100dp"
-        android:layout_height="wrap_content"
-        android:text="Tilbage"
-        android:id="@+id/btnBack"
-        android:layout_above="@+id/btnMore"
-        android:layout_alignParentStart="true" />
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Gæt"
+            android:id="@+id/btnGuess"
+            android:layout_below="@id/eTGuess"
+            android:layout_centerInParent="true" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/twBesked"
-        android:layout_below="@+id/btnGuess"
-        android:layout_centerHorizontal="true" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/twBesked"
+            android:layout_below="@id/btnGuess"
+            android:layout_centerInParent="true"
+            />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Ordet:"
-        android:id="@+id/textView3"
-        android:layout_below="@+id/textView"
-        android:layout_centerHorizontal="true"
-        android:textSize="15dp" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:id="@+id/twHiddenWord"
-        android:layout_below="@+id/textView3"
-        android:layout_centerHorizontal="true"
-        android:textSize="20dp" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Brugte bogstaver"
-        android:id="@+id/textView4"
-        android:layout_below="@+id/btnGuess"
-        android:layout_centerHorizontal="true" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:id="@+id/tvUsedLetters"
-        android:layout_below="@+id/textView4"
-        android:layout_alignStart="@+id/textView4" />
+        android:text="text"
+        android:layout_below="@+id/twBesked"
+        android:layout_centerInParent="true"/>
+
 
     <Button
-        style="?android:attr/buttonStyleSmall"
-        android:layout_width="100dp"
-        android:layout_height="wrap_content"
-        android:text="Mere"
-        android:id="@+id/btnMore"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentStart="true" />
+            style="?android:attr/buttonStyleSmall"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:text="Tilbage"
+            android:id="@+id/btnBack"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentStart="true" />
+
+
+        <Button
+            style="?android:attr/buttonStyleSmall"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:text="Mere"
+            android:id="@+id/btnMore"
+
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentEnd="true" />
+
+
+
+
+
+
+
+
+
 
 </RelativeLayout>
