@@ -55,12 +55,16 @@ public class galgeSpilActivity extends Activity  implements OnClickListener {
         //Set text for Textview
         textView2.setText("Gæt ordet, skriv et bogstav og tryk på knappen");
         tvUsedLetters.setText("Brugte Bogstaver");
+        findViewById(R.id.btnMore).setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(galgeSpilActivity.this, ordFraDR.class));
+            }
+        });
     }
 
     public void onClick(View v) {
-        if(v==btnMore){
-            startActivity(new Intent(galgeSpilActivity.this, listActivity.class));
-        }
+
         if(v==btnBack){
             startActivity(new Intent(galgeSpilActivity.this, MainActivity.class));
         }else if(v ==btnGuess && !galgelogik.erSpilletSlut()){

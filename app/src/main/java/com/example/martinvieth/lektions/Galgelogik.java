@@ -138,7 +138,7 @@ public class Galgelogik {
         return sb.toString();
     }
 
-    public void hentOrdFraDr() throws Exception {
+    public ArrayList<String> hentOrdFraDr() throws Exception {
         String data = hentUrl("http://dr.dk");
         System.out.println("data = " + data);
 
@@ -149,5 +149,6 @@ public class Galgelogik {
 
         System.out.println("muligeOrd = " + muligeOrd);
         nulstil();
+        return null;
     }
 }
