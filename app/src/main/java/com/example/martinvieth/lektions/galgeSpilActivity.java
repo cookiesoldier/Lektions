@@ -66,7 +66,7 @@ public class galgeSpilActivity extends Activity  implements OnClickListener {
     public void onClick(View v) {
 
         if(v==btnBack){
-            startActivity(new Intent(galgeSpilActivity.this, MainActivity.class));
+            finish();
         }else if(v ==btnGuess && !galgelogik.erSpilletSlut()){
             System.out.println("Der gættes");
             if(eTGuess.length() > 1){

@@ -31,9 +31,8 @@
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:text="Gæt ordet, skriv et bogstav og tryk på knappen"
             android:id="@+id/textView2"
-            android:layout_below="@id/imgGalge"
-            android:layout_centerInParent="true"
-        />
+        android:layout_below="@+id/imgGalge"
+        android:layout_alignParentEnd="true" />
 
         <TextView
             android:layout_width="wrap_content"
