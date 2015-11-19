@@ -10,10 +10,10 @@ import android.widget.Button;
 
 public class Frag_menu extends Fragment implements View.OnClickListener {
 
-    Button btnNewGame, btnOptions, btnWords;
+    Button btnNewGame, btnInfo, btnWords;
 
     public View onCreateView(LayoutInflater i, ViewGroup container, Bundle savedInstanceState) {
-        View rod = i.inflate(R.layout.activity_main, container, false);
+        View rod = i.inflate(R.layout.frag_menu, container, false);
 
         btnNewGame = (Button) rod.findViewById(R.id.btnNewGame);
         btnNewGame.setText("Nyt spil");
@@ -21,11 +21,11 @@ public class Frag_menu extends Fragment implements View.OnClickListener {
         btnWords = (Button) rod.findViewById(R.id.btnWords);
         btnWords.setText("Hent ord");
 
-        btnOptions = (Button) rod.findViewById(R.id.btnOptions);
-        btnOptions.setText("Indstillinger");
+        btnInfo = (Button) rod.findViewById(R.id.btnInfo);
+        btnInfo.setText("Info");
 
         btnNewGame.setOnClickListener(this);
-        btnOptions.setOnClickListener(this);
+        btnInfo.setOnClickListener(this);
         btnWords.setOnClickListener(this);
 
         return rod;
@@ -35,21 +35,21 @@ public class Frag_menu extends Fragment implements View.OnClickListener {
     public void onClick(View v) {
         if(v == btnNewGame){
             getFragmentManager().beginTransaction()
-                    .replace(R.id.fragWindow, new galgeSpilActivity())
+                    .replace(R.id.fragWindow, new Frag_Galgespil())
                     .addToBackStack(null)
                     .commit();
         }
 
-        else if(v == btnOptions){
+        else if(v == btnInfo){
             getFragmentManager().beginTransaction()
-                    .replace(R.id.fragWindow, new Frag_options())
+                    .replace(R.id.fragWindow, new Frag_info())
                     .addToBackStack(null)
                     .commit();
         }
 
         else if(v == btnWords){
             getFragmentManager().beginTransaction()
-                    .replace(R.id.fragWindow, new ordFraDR())
+                    .replace(R.id.fragWindow, new Frag_HentOrdFraDR())
                     .addToBackStack(null)
                     .commit();
         }

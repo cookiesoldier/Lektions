@@ -1,36 +1,34 @@
 package com.example.martinvieth.lektions;
 
-import android.app.Activity;
 import android.app.Fragment;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import org.w3c.dom.Text;
-
 import java.util.ArrayList;
 
-public class ordFraDR extends Fragment implements View.OnClickListener{
+public class Frag_HentOrdFraDR extends Fragment implements View.OnClickListener{
 
     //Tilføjer textview, knap og arraylist til at putte ord fra hentOrdFraDr() ind i
     ListView ordFraDr;
     TextView hentOrdStatus;
     Button btnOrd;
     ArrayList<String> ord = new ArrayList();
+    static String selectedWord;
 
     @Override
     public View onCreateView(LayoutInflater i, ViewGroup container, Bundle savedInstanceState) {
-        View rod = i.inflate(R.layout.activity_ord_fra_dr, container, false);
+        View rod = i.inflate(R.layout.frag_hent_ord_fra_dr, container, false);
 
 
         ordFraDr = (ListView) rod.findViewById(R.id.ordFraDr);
+        ordFraDr.setClickable(true);
         hentOrdStatus = (TextView) rod.findViewById(R.id.hentOrdStatus);
         hentOrdStatus.setText("Henter ord...");
         btnOrd = (Button) rod.findViewById(R.id.btnOrd);
@@ -43,7 +41,7 @@ public class ordFraDR extends Fragment implements View.OnClickListener{
             @Override
             protected Object doInBackground(Object... args0) {
                 try {
-                    galgeSpilActivity.logik.hentOrdFraDr();
+                    Frag_Galgespil.logik.hentOrdFraDr();
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -65,10 +63,9 @@ public class ordFraDR extends Fragment implements View.OnClickListener{
 
         //Knap-funktionalitet, henter ordene via getMuligeOrd(), putter dem ind i arraylist "ord"
         if (v == btnOrd) {
-            ord = galgeSpilActivity.logik.getMuligeOrd();
+            ord = Frag_Galgespil.logik.getMuligeOrd();
             ordFraDr.setAdapter(new ArrayAdapter(getActivity(),
-                    android.R.layout.simple_list_item_1, android.R.id.text1, galgeSpilActivity.logik.getMuligeOrd()));
-
+                    android.R.layout.simple_list_item_1, android.R.id.text1, Frag_Galgespil.logik.getMuligeOrd()));
         }
     }
 }
