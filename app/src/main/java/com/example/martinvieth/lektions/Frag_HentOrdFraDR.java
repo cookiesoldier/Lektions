@@ -1,6 +1,7 @@
 package com.example.martinvieth.lektions;
 
 import android.app.Fragment;
+import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -30,6 +31,7 @@ public class Frag_HentOrdFraDR extends Fragment implements View.OnClickListener{
         ordFraDr = (ListView) rod.findViewById(R.id.ordFraDr);
         ordFraDr.setClickable(true);
         hentOrdStatus = (TextView) rod.findViewById(R.id.hentOrdStatus);
+        hentOrdStatus.setTextColor(Color.rgb(248, 248, 255));
         hentOrdStatus.setText("Henter ord...");
         btnOrd = (Button) rod.findViewById(R.id.btnOrd);
         btnOrd.setOnClickListener(this);

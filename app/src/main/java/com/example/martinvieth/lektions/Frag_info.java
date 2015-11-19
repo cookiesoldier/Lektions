@@ -1,6 +1,7 @@
 package com.example.martinvieth.lektions;
 
 import android.app.Activity;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.app.Fragment;
@@ -29,7 +30,8 @@ public class Frag_info extends Fragment implements View.OnClickListener{
         btnBack.setOnClickListener(this);
 
         tv = new TextView(getActivity());
-        tv.setTextSize(20);
+        tv.setTextSize(17);
+        tv.setTextColor(Color.rgb(248, 248, 255));
         tv.setText("Der er et lille udvalg af ord, som du kan spille med. \n \nVil du have flere ord, kan du trykke på Hent Ord-knappen.");
 
         tl.addView(tv);

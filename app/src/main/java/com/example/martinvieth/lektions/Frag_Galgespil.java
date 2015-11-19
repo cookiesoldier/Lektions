@@ -1,6 +1,7 @@
 package com.example.martinvieth.lektions;
 
 import android.content.res.TypedArray;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.app.Fragment;
 import android.view.LayoutInflater;
@@ -18,8 +19,8 @@ public class Frag_Galgespil extends Fragment implements View.OnClickListener{
 
     Frag_HentOrdFraDR hentOrd = new Frag_HentOrdFraDR();
     static Galgelogik logik = new Galgelogik();
-    private TextView txtUsedWords, txtWelcome, txtInfo, txtHiddenWords;
-    private Button btnGuess, btnBack, btnPickWord;
+    private TextView txtUsedWords, txtInfo, txtHiddenWords;
+    private Button btnGuess, btnBack;
     private ImageView galge;
     private EditText etxtGuess;
 
@@ -32,21 +33,21 @@ public class Frag_Galgespil extends Fragment implements View.OnClickListener{
         galge = new ImageView(getActivity());
         tl.addView(galge);
 
-        txtWelcome = new TextView(getActivity());
-        txtWelcome.setText("Velkommen til vores Galgespil!");
-        tl.addView(txtWelcome);
-
         txtInfo = new TextView(getActivity());
+        txtInfo.setTextColor(Color.rgb(248, 248, 255));
         tl.addView(txtInfo);
 
         txtHiddenWords = new TextView(getActivity());
+        txtHiddenWords.setTextColor(Color.rgb(248, 248, 255));
         tl.addView(txtHiddenWords);
 
         txtUsedWords = new TextView(getActivity());
+        txtUsedWords.setTextColor(Color.rgb(248, 248, 255));
         tl.addView(txtUsedWords);
 
         etxtGuess = new EditText(getActivity());
         etxtGuess.setText("Indtast et bogstav");
+        etxtGuess.setTextColor(Color.rgb(248, 248, 255));
         tl.addView(etxtGuess);
 
 
