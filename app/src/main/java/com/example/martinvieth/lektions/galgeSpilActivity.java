@@ -1,46 +1,53 @@
 package com.example.martinvieth.lektions;
 
-import android.app.Activity;
-import android.content.Intent;
-import android.content.res.TypedArray;
 import android.os.Bundle;
-
+import android.app.Fragment;
+import android.view.LayoutInflater;
 import android.view.View;
-import android.view.View.OnClickListener;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TableLayout;
 import android.widget.TextView;
 
-public class galgeSpilActivity extends Activity  implements OnClickListener {
+import com.example.martinvieth.lektions.Galgelogik;
 
-    Button btnBack,btnGuess,btnMore;
-    EditText eTGuess;
-    TextView twBesked,textView,textView2;
-    public static Galgelogik galgelogik;
-    ImageView imgGalge;
-    TextView tvUsedLetters, twHiddenWord;
-    TypedArray images;
+public class galgeSpilActivity extends Fragment implements View.OnClickListener{
+
+    static Galgelogik logik = new Galgelogik();
+    private TextView txtUsedWords, txtWelcome, txtInfo, txtHiddenWords;
+    private Button btnGuess, btnBack;
+    private ImageView galge;
+    private EditText etxtGuess;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_galge_spil);
 
-        galgelogik = new Galgelogik();
-        //buttons
-        btnBack = (Button) findViewById(R.id.btnBack);
-        btnBack.setOnClickListener(this);
-        btnGuess = (Button) findViewById(R.id.btnGuess);
+
+        TableLayout tl = new TableLayout(getActivity());
+
+        txtWelcome = new TextView(getActivity());
+        txtWelcome.setText("Velkommen til vores Galgespil!");
+        tl.addView(txtWelcome);
+
+        txtHiddenWords = new TextView(getActivity());
+//        txtHiddenWords.setText(logik.getSynligtOrd());
+        tl.addView(txtHiddenWords);
+
+        txtUsedWords = new TextView(getActivity());
+//        txtUsedWords.append((CharSequence) logik.getBrugteBogstaver());
+        tl.addView(txtUsedWords);
+
+        etxtGuess = new EditText(getActivity());
+        tl.addView(etxtGuess);
+
+        btnGuess = new Button(getActivity());
         btnGuess.setOnClickListener(this);
-        btnMore = (Button) findViewById(R.id.btnMore);
-        btnMore.setOnClickListener(this);
-
-        //text box for guess
-        eTGuess = (EditText) findViewById(R.id.eTGuess);
-
-////
-        //Text view for error or messages
+        tl.addView(btnGuess);
+/*
+        setContentView(R.layout.activity_galge_spil);
         twBesked = (TextView) findViewById(R.id.twBesked);
         twHiddenWord = (TextView) findViewById(R.id.twHiddenWord);
         textView = (TextView) findViewById(R.id.textView);
@@ -55,61 +62,50 @@ public class galgeSpilActivity extends Activity  implements OnClickListener {
         //Set text for Textview
         textView2.setText("Gæt ordet, skriv et bogstav og tryk på knappen");
         tvUsedLetters.setText("Brugte Bogstaver");
-        findViewById(R.id.btnMore).setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(galgeSpilActivity.this, ordFraDR.class));
-            }
-        });
+
+         */
+
+        return tl;
     }
 
     public void onClick(View v) {
 
-        if(v==btnBack){
-            finish();
-        }else if(v ==btnGuess && !galgelogik.erSpilletSlut()){
+        if(v==btnGuess&& !logik.erSpilletSlut()){
             System.out.println("Der gættes");
-            if(eTGuess.length() > 1){
-                twBesked.setText("For mange bogstaver!");
-            }else if(eTGuess.length() < 1){
-                twBesked.setText("Send et bogstav!");
-            }else if(eTGuess.length() == 1){
-                galgelogik.gætBogstav(eTGuess.getText().toString());
-                imgGalge.setImageResource(images.getResourceId(galgelogik.getAntalForkerteBogstaver(),0));
+            if(etxtGuess.length() == 1){
+                logik.gætBogstav(etxtGuess.getText().toString());
+//                galge.setImageResource(.getResourceId(logik.getAntalForkerteBogstaver(), 0));
 
             }
-            galgeGraphicsOpgadeter();
+            galgeGraphicsOpdater();
 
-        }else if(v == btnGuess && galgelogik.erSpilletSlut()){
+        }else if(v == btnGuess && logik.erSpilletSlut()){
             //game reset
-            galgelogik.nulstil();
-            textView.setText("Velkommen til galge spillet!");
-            textView2.setText("Gæt ordet, skriv et bogstav og tryk på knappen");
-            btnGuess.setText("Gæt");
-            twHiddenWord.setText("");
-            tvUsedLetters.setText("");
+            logik.nulstil();
+            txtHiddenWords.setText("");
+            txtUsedWords.setText("");
 
         }
-        eTGuess.setText("");
+        etxtGuess.setText("");
     }
 
-    public void galgeGraphicsOpgadeter() {
-        twHiddenWord.setText(galgelogik.getSynligtOrd());
-        tvUsedLetters.setText("Brugte Bogstaver"+ galgelogik.getBrugteBogstaver().toString());
-        if (galgelogik.erSpilletSlut()) {
-            textView2.setText("Vil du spille igen?");
+    public void galgeGraphicsOpdater() {
+        txtHiddenWords.setText(logik.getSynligtOrd());
+        txtUsedWords.setText("Brugte Bogstaver"+ logik.getBrugteBogstaver().toString());
+        if (logik.erSpilletSlut()) {
+            txtWelcome.setText("Vil du spille igen?");
             btnGuess.setText("Nyt Spil");
 
 
-            if (galgelogik.erSpilletVundet()) {
-                textView.setText("Du vandt! woho!");
+            if (logik.erSpilletVundet()) {
+                txtInfo.setText("Du vandt! woho!");
 
             } else {
-                textView.setText("Du tabte! Boooh!");
-                twHiddenWord.setText(galgelogik.getOrdet());
+                txtInfo.setText("Du tabte! Boooh!");
+                txtHiddenWords.setText(logik.getOrdet());
             }
 
 
         }
-   }
+    }
 }

@@ -23,20 +23,36 @@
         android:layout_centerHorizontal="true" />
 
     <Button
-        android:layout_width="wrap_content"
+        android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:text="Nyt Spil"
         android:id="@+id/btnNewGame"
-        android:layout_below="@+id/imageView"
-        android:layout_alignEnd="@+id/Overskrift"
-        android:layout_marginTop="42dp" />
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="115dp" />
 
     <Button
-        android:layout_width="wrap_content"
+        android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:text="Indstillinger"
-        android:id="@+id/btnInstil"
+        android:id="@+id/btnOptions"
         android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:id="@+id/txtInfo"
+        android:layout_below="@+id/btnOptions"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="36dp" />
+
+    <Button
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/btnWords"
+        android:layout_alignTop="@+id/txtInfo"
         android:layout_centerHorizontal="true" />
 
 </RelativeLayout>

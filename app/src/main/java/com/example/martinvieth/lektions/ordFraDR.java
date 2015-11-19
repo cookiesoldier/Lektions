@@ -1,9 +1,12 @@
 package com.example.martinvieth.lektions;
 
 import android.app.Activity;
+import android.app.Fragment;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -14,7 +17,7 @@ import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 
-public class ordFraDR extends Activity implements View.OnClickListener{
+public class ordFraDR extends Fragment implements View.OnClickListener{
 
     //Tilføjer textview, knap og arraylist til at putte ord fra hentOrdFraDr() ind i
     ListView ordFraDr;
@@ -23,15 +26,14 @@ public class ordFraDR extends Activity implements View.OnClickListener{
     ArrayList<String> ord = new ArrayList();
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_ord_fra_dr);
+    public View onCreateView(LayoutInflater i, ViewGroup container, Bundle savedInstanceState) {
+        View rod = i.inflate(R.layout.activity_ord_fra_dr, container, false);
 
 
-        ordFraDr = (ListView) findViewById(R.id.ordFraDr);
-        hentOrdStatus = (TextView) findViewById(R.id.hentOrdStatus);
+        ordFraDr = (ListView) rod.findViewById(R.id.ordFraDr);
+        hentOrdStatus = (TextView) rod.findViewById(R.id.hentOrdStatus);
         hentOrdStatus.setText("Henter ord...");
-        btnOrd = (Button) findViewById(R.id.btnOrd);
+        btnOrd = (Button) rod.findViewById(R.id.btnOrd);
         btnOrd.setOnClickListener(this);
 
 
@@ -41,7 +43,7 @@ public class ordFraDR extends Activity implements View.OnClickListener{
             @Override
             protected Object doInBackground(Object... args0) {
                 try {
-                    galgeSpilActivity.galgelogik.hentOrdFraDr();
+                    galgeSpilActivity.logik.hentOrdFraDr();
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -55,6 +57,7 @@ public class ordFraDR extends Activity implements View.OnClickListener{
             }
         };
         asyncTask.execute();
+        return rod;
     }
 
     @Override
@@ -62,9 +65,9 @@ public class ordFraDR extends Activity implements View.OnClickListener{
 
         //Knap-funktionalitet, henter ordene via getMuligeOrd(), putter dem ind i arraylist "ord"
         if (v == btnOrd) {
-            ord = galgeSpilActivity.galgelogik.getMuligeOrd();
-            ordFraDr.setAdapter(new ArrayAdapter(this,
-                    android.R.layout.simple_list_item_1, android.R.id.text1, galgeSpilActivity.galgelogik.getMuligeOrd()));
+            ord = galgeSpilActivity.logik.getMuligeOrd();
+            ordFraDr.setAdapter(new ArrayAdapter(getActivity(),
+                    android.R.layout.simple_list_item_1, android.R.id.text1, galgeSpilActivity.logik.getMuligeOrd()));
 
         }
     }

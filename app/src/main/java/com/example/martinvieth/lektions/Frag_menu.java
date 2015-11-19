@@ -1,0 +1,57 @@
+package com.example.martinvieth.lektions;
+
+import android.os.Bundle;
+import android.app.Fragment;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Button;
+
+
+public class Frag_menu extends Fragment implements View.OnClickListener {
+
+    Button btnNewGame, btnOptions, btnWords;
+
+    public View onCreateView(LayoutInflater i, ViewGroup container, Bundle savedInstanceState) {
+        View rod = i.inflate(R.layout.activity_main, container, false);
+
+        btnNewGame = (Button) rod.findViewById(R.id.btnNewGame);
+        btnNewGame.setText("Nyt spil");
+
+        btnWords = (Button) rod.findViewById(R.id.btnWords);
+        btnWords.setText("Hent ord");
+
+        btnOptions = (Button) rod.findViewById(R.id.btnOptions);
+        btnOptions.setText("Indstillinger");
+
+        btnNewGame.setOnClickListener(this);
+        btnOptions.setOnClickListener(this);
+        btnWords.setOnClickListener(this);
+
+        return rod;
+    }
+
+    @Override
+    public void onClick(View v) {
+        if(v == btnNewGame){
+            getFragmentManager().beginTransaction()
+                    .replace(R.id.fragWindow, new galgeSpilActivity())
+                    .addToBackStack(null)
+                    .commit();
+        }
+
+        else if(v == btnOptions){
+            getFragmentManager().beginTransaction()
+                    .replace(R.id.fragWindow, new Frag_options())
+                    .addToBackStack(null)
+                    .commit();
+        }
+
+        else if(v == btnWords){
+            getFragmentManager().beginTransaction()
+                    .replace(R.id.fragWindow, new ordFraDR())
+                    .addToBackStack(null)
+                    .commit();
+        }
+    }
+}

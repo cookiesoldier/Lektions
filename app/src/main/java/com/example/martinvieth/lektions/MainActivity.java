@@ -1,50 +1,38 @@
 package com.example.martinvieth.lektions;
 
 import android.app.Activity;
-
-import android.content.Intent;
+import android.app.FragmentManager;
 import android.os.Bundle;
-
-import android.view.View;
-import android.view.View.OnClickListener;
-
-import android.widget.Button;
+import android.app.Fragment;
+import android.view.MenuItem;
+import android.view.Window;
 
 
-
-public class MainActivity extends Activity implements View.OnClickListener {
-
-
-
-    Button btnNewGame;
+public class MainActivity extends Activity {
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        requestWindowFeature(Window.FEATURE_ACTION_BAR);
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        //Initialize buttons and checkbox
+        setContentView(R.layout.frag_main);
 
-
-        btnNewGame = (Button) findViewById(R.id.btnNewGame);
-
-        btnNewGame.setOnClickListener(this);
-
-
-
-
-
-    }
-
-    public void onClick(View v) {
-        if(v == btnNewGame){
-            startActivity(new Intent(MainActivity.this, galgeSpilActivity.class));
+        if (savedInstanceState == null) {
+            Fragment fragment = new Frag_menu();
+            getFragmentManager().beginTransaction()
+                    .add(R.id.fragWindow, fragment)  // tom container i layout
+                    .commit();
         }
 
-
-
+        setTitle("Galgespil");
     }
 
-
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == android.R.id.home) {
+            onBackPressed(); // brugeren vil navigere op i hierakiet
+        }
+        return super.onOptionsItemSelected(item);
+    }
 
 }
