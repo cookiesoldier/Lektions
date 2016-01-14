@@ -43,7 +43,7 @@ public class Frag_HentOrdFraDR extends Fragment implements View.OnClickListener{
             @Override
             protected Object doInBackground(Object... args0) {
                 try {
-                    Frag_Galgespil.logik.hentOrdFraDr();
+                    Frag_Galgespil.getLogic().hentOrdFraDr();
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -65,9 +65,9 @@ public class Frag_HentOrdFraDR extends Fragment implements View.OnClickListener{
 
         //Knap-funktionalitet, henter ordene via getMuligeOrd(), putter dem ind i arraylist "ord"
         if (v == btnOrd) {
-            ord = Frag_Galgespil.logik.getMuligeOrd();
+            ord = Frag_Galgespil.getLogic().getMuligeOrd();
             ordFraDr.setAdapter(new ArrayAdapter(getActivity(),
-                    android.R.layout.simple_list_item_1, android.R.id.text1, Frag_Galgespil.logik.getMuligeOrd()));
+                    android.R.layout.simple_list_item_1, android.R.id.text1, Frag_Galgespil.getLogic().getMuligeOrd()));
         }
     }
 }

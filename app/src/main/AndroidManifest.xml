@@ -12,7 +12,8 @@
         android:theme="@style/AppTheme" >
 
         <activity
-            android:name=".Activity_Main">
+            android:name=".Activity_Main"
+            android:label="g32 Galgeleg">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

@@ -93,6 +93,7 @@ public class Galgelogik {
     }
 
     public void gætBogstav(String bogstav) {
+        bogstav = bogstav.toLowerCase();
         if (bogstav.length() != 1) return;
         System.out.println("Der gættes på bogstavet: " + bogstav);
         if (brugteBogstaver.contains(bogstav)) return;
