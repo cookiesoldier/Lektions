@@ -1,6 +1,10 @@
 package com.example.martinvieth.lektions;
 
+import android.app.AlertDialog;
+import android.app.Dialog;
+import android.app.DialogFragment;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -13,6 +17,8 @@ import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
+import android.hardware.TriggerEvent;
+import android.hardware.TriggerEventListener;
 import android.os.Bundle;
 import android.app.Fragment;
 import android.util.AttributeSet;
@@ -34,9 +40,11 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.Random;
 
-public class Frag_Galgespil extends Fragment implements View.OnClickListener, SensorEventListener{
+public class Frag_Galgespil extends Fragment implements View.OnClickListener, ShakeDetector.OnShakeListener {
 
+    private ShakeDetector shakeDetector;
     private SensorManager sensorManager;
+    private Sensor accelerometer;
     private Frag_HentOrdFraDR hentOrd = new Frag_HentOrdFraDR();
     private static Galgelogik gl = null;
     private GalgeView gv = null;
@@ -45,6 +53,7 @@ public class Frag_Galgespil extends Fragment implements View.OnClickListener, Se
     private ImageView galge;
     private EditText etxtGuess;
     private Point screenSize = new Point();
+    private ViewGroup container;
 
 
     @Override
@@ -54,9 +63,15 @@ public class Frag_Galgespil extends Fragment implements View.OnClickListener, Se
         WindowManager wm = (WindowManager) getActivity().getSystemService(Context.WINDOW_SERVICE);
         Display display = wm.getDefaultDisplay();
         display.getSize(screenSize);
+        this.container = container;
+
+        Log.d("Galge", "container: "+container.toString() + " - " + container.getTransitionName()
+                + "\nwidth: "+container.getWidth() + " height: " + container.getHeight());
 
         sensorManager = (SensorManager) getActivity().getSystemService(Context.SENSOR_SERVICE);
-        sensorManager.registerListener(this, SensorManager.)
+        accelerometer = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
+        shakeDetector = new ShakeDetector(this);
+
 
         if (gl == null) {
             gl = new Galgelogik();
@@ -85,19 +100,6 @@ public class Frag_Galgespil extends Fragment implements View.OnClickListener, Se
         txtUsedWords.setTextColor(Color.rgb(248, 248, 255));
         tl.addView(txtUsedWords);
 
-        /*
-        etxtGuess = new EditText(getActivity());
-        etxtGuess.setText("Indtast et bogstav");
-        etxtGuess.setTextColor(Color.rgb(248, 248, 255));
-        tl.addView(etxtGuess);
-
-
-        btnGuess = new Button(getActivity());
-        btnGuess.setOnClickListener(this);
-        btnGuess.setText("Hent et tilfældigt ord");
-        tl.addView(btnGuess);
-        */
-
         btnNewGame = new Button(getActivity());
         btnNewGame.setOnClickListener(this);
         btnNewGame.setText("Start et nyt spil");
@@ -115,28 +117,21 @@ public class Frag_Galgespil extends Fragment implements View.OnClickListener, Se
         fl.addView(tl);
         fl.addView(gv);
 
-
         return fl;
 
-        /*
+    }
 
-        setContentView(R.layout.frag_galgespil_ubrugt);
-        twBesked = (TextView) findViewById(R.id.twBesked);
-        twHiddenWord = (TextView) findViewById(R.id.twHiddenWord);
-        textView = (TextView) findViewById(R.id.textView);
-        textView2 = (TextView) findViewById(R.id.textView2);
-        tvUsedLetters = (TextView) findViewById(R.id.tvUsedLetters);
+    @Override
+    public void onResume() {
+        super.onResume();
+        sensorManager.registerListener(shakeDetector, accelerometer, SensorManager.SENSOR_DELAY_UI);
+    }
 
-        //Img for the game
-        imgGalge = (ImageView) findViewById(R.id.imgGalge);
-        images = getResources().obtainTypedArray(R.array.galge_imgs);
-        imgGalge.setImageResource(images.getResourceId(galgelogik.getAntalForkerteBogstaver(), 0));
+    @Override
+    public void onPause() {
+        super.onPause();
+        sensorManager.unregisterListener(shakeDetector);
 
-        //Set text for Textview
-        textView2.setText("Gæt ordet, skriv et bogstav og tryk på knappen");
-        tvUsedLetters.setText("Brugte Bogstaver");
-
-         */
     }
 
     public static Galgelogik getLogic() {
@@ -149,44 +144,7 @@ public class Frag_Galgespil extends Fragment implements View.OnClickListener, Se
             Toast.makeText(getActivity(), "Træk et bogstav op på billedet for at gætte!", Toast.LENGTH_LONG);
         }
 
-        //btnGuess.setText("Gæt");
         txtInfo.setText("");
-
-        /*
-
-        if(v==btnGuess && !gl.erSpilletSlut()){
-            txtHiddenWords.setText(gl.getSynligtOrd());
-            gl.gætBogstav(String.valueOf(etxtGuess.getText()));
-            etxtGuess.setText("");
-            updateGalge();
-        }
-
-        if(gl.erSidsteBogstavKorrekt()==true){
-            txtUsedWords.setText(gl.getBrugteBogstaver().toString());
-            txtHiddenWords.setText(gl.getSynligtOrd());
-            //etxtGuess.setText("");
-        }
-        else if(gl.erSidsteBogstavKorrekt()==false){
-            txtUsedWords.setText(gl.getBrugteBogstaver().toString());
-            updateGalge();
-            //etxtGuess.setText("");
-        }
-
-        if(gl.erSpilletSlut()){
-            //game reset
-            if(gl.erSpilletVundet()){
-                txtInfo.setText("Du har vundet! \nOrdet var "+ gl.getOrdet());
-            }
-            else if(gl.erSpilletTabt()){
-                txtInfo.setText("Du har tabt! \nOrdet var " + gl.getOrdet());
-            }
-            btnGuess.setText("Hent nyt ord");
-            gl.nulstil();
-            txtHiddenWords.setText("");
-            txtUsedWords.setText("");
-        }
-
-        */
 
 
         if(v == btnNewGame) {
@@ -198,11 +156,7 @@ public class Frag_Galgespil extends Fragment implements View.OnClickListener, Se
         }
 
         if(v == btnBack){
-            gl.nulstil();
-            //etxtGuess.setText("");
-            txtHiddenWords.setText("");
-            txtUsedWords.setText("");
-            updateGalge();
+            nulstilSpil();
             getFragmentManager().beginTransaction()
                     .replace(R.id.fragWindow, new Frag_menu())
                     .addToBackStack(null)
@@ -234,30 +188,62 @@ public class Frag_Galgespil extends Fragment implements View.OnClickListener, Se
         }
     }
 
-    @Override
-    public void onSensorChanged(SensorEvent event) {
-
+    private void nulstilSpil() {
+        gl.nulstil();
+        txtHiddenWords.setText("");
+        txtUsedWords.setText("");
+        updateGalge();
     }
 
     @Override
-    public void onAccuracyChanged(Sensor sensor, int accuracy) {
-
+    public void onDestroyView() {
+        super.onDestroyView();
+        shakeDetector = null;
+        sensorManager = null;
+        accelerometer = null;
     }
+
+    @Override
+    public void onShake() {
+        DialogInterface.OnClickListener dialogListener = new DialogInterface.OnClickListener(){
+
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                switch (which) {
+                    case DialogInterface.BUTTON_POSITIVE:
+                        nulstilSpil();
+                        break;
+                    case DialogInterface.BUTTON_NEGATIVE:
+                        break;
+                }
+            }
+        };
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        builder.setMessage("Vil du nulstille spillet?")
+                .setPositiveButton("Ja", dialogListener)
+                .setNegativeButton("Fortryd", dialogListener)
+                .show();
+    }
+
+
 
     class Letter {
         RectF r = new RectF();
         String str;
+        int size;
 
-        public Letter(String s, RectF r) {
+        public Letter(String s, RectF r, int size) {
             this.r = r;
             str = s;
+
         }
     }
 
     class GalgeView extends View {
 
         PointF finger = new PointF();
-        ArrayList<Letter> letters = new ArrayList<Letter>();
+        ArrayList<Letter> letters = new ArrayList<>();
         Letter chosenLetter = null;
         Paint textType = new Paint();
         Paint lineType = new Paint();
@@ -289,7 +275,7 @@ public class Frag_Galgespil extends Fragment implements View.OnClickListener, Se
                 String letter;
                 letter = String.valueOf((char) i);
                 //System.out.println("------> "+ letter);
-                Letter bogstav = new Letter(letter, getRandomStartRectF());
+                Letter bogstav = new Letter(letter, getRandomStartRectF(), 70);
                 letters.add(bogstav);
                 System.out.println("--> "+ letter + " was added to the letters list" +
                         "\nat "+bogstav.r.toString());
@@ -329,14 +315,14 @@ public class Frag_Galgespil extends Fragment implements View.OnClickListener, Se
             float bottom;
             float rectwidth = 70f;
             float rectheight = 70f;
-            int height = getHeight();
-            System.out.println("<<-- height = "+height);
-            int width = getWidth();
-            System.out.println("<<-- width = "+width);
+            int height = container.getHeight();
+            //System.out.println("<<-- height = "+height);
+            int width = container.getWidth();
+            //System.out.println("<<-- width = "+width);
 
             Random rand = new Random();
-            left = rand.nextInt(screenSize.x) - rectwidth;
-            top = rand.nextInt(screenSize.y/2) + screenSize.y/2 - rectheight;
+            left = rand.nextInt(width) - rectwidth;
+            top = rand.nextInt(height/2) + height/2 - rectheight;
             right = left + rectwidth;
             bottom = top + rectheight;
 
