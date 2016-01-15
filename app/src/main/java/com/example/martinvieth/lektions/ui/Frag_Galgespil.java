@@ -1,11 +1,8 @@
-package com.example.martinvieth.lektions;
+package com.example.martinvieth.lektions.ui;
 
 import android.app.AlertDialog;
-import android.app.Dialog;
-import android.app.DialogFragment;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
@@ -14,11 +11,7 @@ import android.graphics.PointF;
 import android.graphics.Rect;
 import android.graphics.RectF;
 import android.hardware.Sensor;
-import android.hardware.SensorEvent;
-import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
-import android.hardware.TriggerEvent;
-import android.hardware.TriggerEventListener;
 import android.os.Bundle;
 import android.app.Fragment;
 import android.util.AttributeSet;
@@ -36,6 +29,10 @@ import android.widget.ImageView;
 import android.widget.TableLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.example.martinvieth.lektions.logic.Galgelogik;
+import com.example.martinvieth.lektions.R;
+import com.example.martinvieth.lektions.helper.ShakeDetector;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -90,14 +87,17 @@ public class Frag_Galgespil extends Fragment implements View.OnClickListener, Sh
 
         txtInfo = new TextView(getActivity());
         txtInfo.setTextColor(Color.rgb(248, 248, 255));
+
         tl.addView(txtInfo);
 
         txtHiddenWords = new TextView(getActivity());
         txtHiddenWords.setTextColor(Color.rgb(248, 248, 255));
+        txtHiddenWords.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
         tl.addView(txtHiddenWords);
 
         txtUsedWords = new TextView(getActivity());
         txtUsedWords.setTextColor(Color.rgb(248, 248, 255));
+        txtUsedWords.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
         tl.addView(txtUsedWords);
 
         btnNewGame = new Button(getActivity());
@@ -109,6 +109,8 @@ public class Frag_Galgespil extends Fragment implements View.OnClickListener, Sh
         btnBack = new Button(getActivity());
         btnBack.setOnClickListener(this);
         btnBack.setText("Afslut");
+        btnBack.setWidth(container.getWidth() / 2);
+        System.out.println("btnBack w: " + btnBack.getWidth());
         tl.addView(btnBack);
 
         txtUsedWords.setText(gl.getBrugteBogstaver().toString());
@@ -116,6 +118,12 @@ public class Frag_Galgespil extends Fragment implements View.OnClickListener, Sh
 
         fl.addView(tl);
         fl.addView(gv);
+
+
+        txtInfo.setId(101);
+        txtHiddenWords.setId(102);
+        txtUsedWords.setId(103);
+
 
         return fl;
 
@@ -203,8 +211,11 @@ public class Frag_Galgespil extends Fragment implements View.OnClickListener, Sh
         accelerometer = null;
     }
 
+    private boolean isDialogVisible = false;
+
     @Override
     public void onShake() {
+
         DialogInterface.OnClickListener dialogListener = new DialogInterface.OnClickListener(){
 
             @Override
@@ -212,18 +223,28 @@ public class Frag_Galgespil extends Fragment implements View.OnClickListener, Sh
                 switch (which) {
                     case DialogInterface.BUTTON_POSITIVE:
                         nulstilSpil();
+                        getFragmentManager().beginTransaction()
+                                .replace(R.id.fragWindow, new Frag_Galgespil())
+                                .addToBackStack(null)
+                                .commit();
+                        isDialogVisible = false;
                         break;
                     case DialogInterface.BUTTON_NEGATIVE:
+                        isDialogVisible = false;
                         break;
                 }
+
             }
         };
 
-        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-        builder.setMessage("Vil du nulstille spillet?")
-                .setPositiveButton("Ja", dialogListener)
-                .setNegativeButton("Fortryd", dialogListener)
-                .show();
+        if (!isDialogVisible) {
+            AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+            builder.setMessage("Vil du nulstille spillet?")
+                    .setPositiveButton("Ja", dialogListener)
+                    .setNegativeButton("Fortryd", dialogListener)
+                    .show();
+        }
+        isDialogVisible = true;
     }
 
 
@@ -253,7 +274,7 @@ public class Frag_Galgespil extends Fragment implements View.OnClickListener, Sh
 
         private void init() {
 
-            textType.setColor(Color.BLUE);
+            textType.setColor(Color.RED);
             textType.setTextSize(85);
             textType.setAntiAlias(true);
             lineType.setColor(Color.BLACK);
@@ -272,14 +293,35 @@ public class Frag_Galgespil extends Fragment implements View.OnClickListener, Sh
         public void spawnLetters() {
             letters.clear();
             for(int i = 'A'; i <= 'Z'; i++) {
+                int letterSize = container.getWidth()/15;
                 String letter;
                 letter = String.valueOf((char) i);
                 //System.out.println("------> "+ letter);
-                Letter bogstav = new Letter(letter, getRandomStartRectF(), 70);
+                Letter bogstav = new Letter(letter, getRandomStartRectF(), 1);
                 letters.add(bogstav);
                 System.out.println("--> "+ letter + " was added to the letters list" +
                         "\nat "+bogstav.r.toString());
             }
+        }
+
+        private RectF getRandomStartRectF() {
+            float left;
+            float top;
+            float right;
+            float bottom;
+            int height = container.getHeight();
+            int width = container.getWidth();
+            float rectwidth = width/15;
+            float rectheight = rectwidth;
+
+
+            Random rand = new Random();
+            left = rand.nextInt(width - (int) rectwidth);
+            top = rand.nextInt(height/2) + height/2 - rectheight;
+            right = left + rectwidth;
+            bottom = top + rectheight;
+
+            return new RectF(left, top, right, bottom);
         }
 
 
@@ -306,27 +348,6 @@ public class Frag_Galgespil extends Fragment implements View.OnClickListener, Sh
             viewHeight = h;
             viewWidth = w;
             System.out.println("SIZE CHANGED --------");
-        }
-
-        private RectF getRandomStartRectF() {
-            float left;
-            float top;
-            float right;
-            float bottom;
-            float rectwidth = 70f;
-            float rectheight = 70f;
-            int height = container.getHeight();
-            //System.out.println("<<-- height = "+height);
-            int width = container.getWidth();
-            //System.out.println("<<-- width = "+width);
-
-            Random rand = new Random();
-            left = rand.nextInt(width) - rectwidth;
-            top = rand.nextInt(height/2) + height/2 - rectheight;
-            right = left + rectwidth;
-            bottom = top + rectheight;
-
-            return new RectF(left, top, right, bottom);
         }
 
         public GalgeView(Context c) {
@@ -437,7 +458,7 @@ public class Frag_Galgespil extends Fragment implements View.OnClickListener, Sh
         private void drawLetter(Canvas c, float x, float y, Letter l) {
             RectF r = new RectF(l.r);
             r.offsetTo(x, y);
-            c.drawRect(r, lineType);
+            //c.drawRect(r, lineType);
             c.drawText(l.str, r.left, r.bottom, textType);
         }
     }

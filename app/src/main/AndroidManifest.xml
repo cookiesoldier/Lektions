@@ -9,10 +9,10 @@
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme" >
+        android:theme="@style/AppTheme">
 
         <activity
-            android:name=".Activity_Main"
+            android:name=".ui.Activity_Main"
             android:label="g32 Galgeleg">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

@@ -1,4 +1,4 @@
-package com.example.martinvieth.lektions;
+package com.example.martinvieth.lektions.ui;
 
 import android.app.Fragment;
 import android.graphics.Color;
@@ -11,6 +11,8 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
+
+import com.example.martinvieth.lektions.R;
 
 import java.util.ArrayList;
 

@@ -1,4 +1,4 @@
-package com.example.martinvieth.lektions;
+package com.example.martinvieth.lektions.logic;
 
 import java.io.BufferedReader;
 import java.io.IOException;

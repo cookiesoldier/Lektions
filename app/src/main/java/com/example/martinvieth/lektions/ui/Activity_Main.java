@@ -1,10 +1,12 @@
-package com.example.martinvieth.lektions;
+package com.example.martinvieth.lektions.ui;
 
 import android.app.Activity;
 import android.os.Bundle;
 import android.app.Fragment;
 import android.view.MenuItem;
 import android.view.Window;
+
+import com.example.martinvieth.lektions.R;
 
 
 public class Activity_Main extends Activity {

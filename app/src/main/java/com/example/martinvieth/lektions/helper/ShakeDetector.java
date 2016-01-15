@@ -1,4 +1,4 @@
-package com.example.martinvieth.lektions;
+package com.example.martinvieth.lektions.helper;
 
 import android.hardware.SensorEvent;
 

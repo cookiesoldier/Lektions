@@ -1,4 +1,4 @@
-package com.example.martinvieth.lektions;
+package com.example.martinvieth.lektions.ui;
 
 import android.os.Bundle;
 import android.app.Fragment;
@@ -6,6 +6,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+
+import com.example.martinvieth.lektions.R;
 
 
 public class Frag_menu extends Fragment implements View.OnClickListener {

@@ -1,19 +1,20 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
-    android:layout_height="match_parent" tools:context="com.example.martinvieth.lektions.Activity_Main">
+    android:layout_height="match_parent" tools:context=".ui.Activity_Main">
 
     <!-- TODO: Update blank fragment layout -->
 
     <FrameLayout
         android:background="#ff333399"
         android:layout_width="match_parent"
-        android:layout_height="510dp"
+        android:layout_height="match_parent"
         android:id="@+id/fragWindow"
         android:layout_alignParentLeft="true"
         android:layout_marginLeft="0dp"
         android:layout_alignParentTop="true"
         android:layout_marginTop="0dp">
 
+        <!--
         <TextView
             android:background="#6A5ACD"
             android:layout_width="fill_parent"
@@ -21,5 +22,7 @@
             android:text="Copyright, all rights reserved"
             android:id="@+id/txtBottom"
             android:layout_gravity="center_horizontal|bottom" />
+            -->
+
     </FrameLayout>
 </RelativeLayout>

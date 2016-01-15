@@ -1,8 +1,6 @@
-package com.example.martinvieth.lektions;
+package com.example.martinvieth.lektions.ui;
 
-import android.app.Activity;
 import android.graphics.Color;
-import android.net.Uri;
 import android.os.Bundle;
 import android.app.Fragment;
 import android.view.LayoutInflater;
