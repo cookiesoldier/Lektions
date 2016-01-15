@@ -252,9 +252,8 @@ public class Frag_Galgespil extends Fragment implements View.OnClickListener, Sh
     class Letter {
         RectF r = new RectF();
         String str;
-        int size;
 
-        public Letter(String s, RectF r, int size) {
+        public Letter(String s, RectF r) {
             this.r = r;
             str = s;
 
@@ -275,7 +274,7 @@ public class Frag_Galgespil extends Fragment implements View.OnClickListener, Sh
         private void init() {
 
             textType.setColor(Color.RED);
-            textType.setTextSize(85);
+            textType.setTextSize(container.getWidth()/11);
             textType.setAntiAlias(true);
             lineType.setColor(Color.BLACK);
             lineType.setStyle(Paint.Style.STROKE);
@@ -293,11 +292,10 @@ public class Frag_Galgespil extends Fragment implements View.OnClickListener, Sh
         public void spawnLetters() {
             letters.clear();
             for(int i = 'A'; i <= 'Z'; i++) {
-                int letterSize = container.getWidth()/15;
                 String letter;
                 letter = String.valueOf((char) i);
                 //System.out.println("------> "+ letter);
-                Letter bogstav = new Letter(letter, getRandomStartRectF(), 1);
+                Letter bogstav = new Letter(letter, getRandomStartRectF());
                 letters.add(bogstav);
                 System.out.println("--> "+ letter + " was added to the letters list" +
                         "\nat "+bogstav.r.toString());
@@ -458,7 +456,7 @@ public class Frag_Galgespil extends Fragment implements View.OnClickListener, Sh
         private void drawLetter(Canvas c, float x, float y, Letter l) {
             RectF r = new RectF(l.r);
             r.offsetTo(x, y);
-            //c.drawRect(r, lineType);
+            c.drawRect(r, lineType);
             c.drawText(l.str, r.left, r.bottom, textType);
         }
     }
