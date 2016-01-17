@@ -195,7 +195,6 @@ public class Frag_Galgespil extends Fragment implements View.OnClickListener, Sh
             galge.setImageResource(R.mipmap.forkert6);
         }
     }
-
     private void nulstilSpil() {
         gl.nulstil();
         txtHiddenWords.setText("");
@@ -397,12 +396,13 @@ public class Frag_Galgespil extends Fragment implements View.OnClickListener, Sh
                 }
             }
 
+
             if (e.getAction() == MotionEvent.ACTION_UP) {
-                if(chosenLetter != null) {
+                if (chosenLetter != null) {
                     Rect imageRect = new Rect();
                     galge.getHitRect(imageRect);
                     System.out.println("ImageRect: " + imageRect.toString());
-                    if (imageRect.contains((int) finger.x, (int) finger.y)){
+                    if (imageRect.contains((int) finger.x, (int) finger.y)) {
                         //TODO
                         gl.gætBogstav(chosenLetter.str);
                         updateGalge();
@@ -417,8 +417,8 @@ public class Frag_Galgespil extends Fragment implements View.OnClickListener, Sh
                     chosenLetter.r.offsetTo(finger.x, finger.y);
                     Log.d("Galge", "chosenLetter.r = " + chosenLetter.r);
 
-                }
 
+            }
                 if(gl.erSpilletSlut()){
                     //game reset
                     if(gl.erSpilletVundet()){

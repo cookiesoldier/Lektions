@@ -5,7 +5,7 @@
     <!-- TODO: Update blank fragment layout -->
 
     <FrameLayout
-        android:background="#ff333399"
+        android:background="#C0C0C0"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/fragWindow"
