@@ -57,9 +57,10 @@ public class Frag_Galgespil extends Fragment implements View.OnClickListener, Sh
 
         FrameLayout fl = new FrameLayout(getActivity());
         TableLayout tl = new TableLayout(getActivity());
-
-
+        
         galge = new ImageView(getActivity());
+        galge.setMinimumWidth(container.getWidth()/3);
+        galge.setMinimumHeight(container.getWidth()/3);
         galge.setImageResource(R.mipmap.galge);
         tl.addView(galge);
 
@@ -76,7 +77,6 @@ public class Frag_Galgespil extends Fragment implements View.OnClickListener, Sh
         txtUsedWords.setTextColor(Color.rgb(248, 248, 255));
         txtUsedWords.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
         tl.addView(txtUsedWords);
-
 
         btnNewGame = new Button(getActivity());
         btnNewGame.setOnClickListener(this);
