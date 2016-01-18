@@ -1,16 +1,22 @@
 package com.example.martinvieth.lektions.ui;
 
 import android.app.Activity;
+import android.content.Context;
+import android.media.MediaPlayer;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.app.Fragment;
 import android.view.MenuItem;
 import android.view.Window;
 
 import com.example.martinvieth.lektions.R;
+import com.example.martinvieth.lektions.logic.Galgelogik;
 
 
 public class Activity_Main extends Activity {
 
+    private static Galgelogik gl;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,5 +41,29 @@ public class Activity_Main extends Activity {
         }
         return super.onOptionsItemSelected(item);
     }
+
+    public boolean isNetworkAvailable() {
+        ConnectivityManager connectivityManager
+                = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+        return activeNetworkInfo != null && activeNetworkInfo.isConnected();
+    }
+
+    interface AppMediaPlayer {
+        void playSound();
+        void stopMediaPlayer();
+    }
+
+
+    public void playSound(int id) {
+        MediaPlayer mp = MediaPlayer.create(this, id);
+        mp.start();
+    }
+
+    public void stopMediaPlayer() {
+
+    }
+
+
 
 }
