@@ -8,12 +8,10 @@ import android.graphics.PointF;
 import android.graphics.Rect;
 import android.graphics.RectF;
 import android.graphics.Typeface;
-import android.support.v4.app.Fragment;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
-import android.widget.Toast;
 
 import com.example.martinvieth.lektions.R;
 import com.example.martinvieth.lektions.logic.Galgelogik;
@@ -64,7 +62,7 @@ public class GalgeView extends View{
 
         Typeface font = Typeface.createFromAsset(spil.getActivity().getAssets(), "athletic.ttf");
         textType.setTypeface(font);
-        textType.setColor(Color.RED);
+        textType.setColor(Color.parseColor("#000080"));
         textType.setTextSize(spil.container.getWidth() / 11);
         textType.setAntiAlias(true);
         textType.setStyle(Paint.Style.FILL);
@@ -159,12 +157,12 @@ public class GalgeView extends View{
                 spil.galge.getHitRect(imageRect);
                 System.out.println("ImageRect: " + imageRect.toString());
                 if (imageRect.contains((int) finger.x, (int) finger.y)){
-                    //TODO
                     gl.gætBogstav(chosenLetter.str);
                     spil.updateGalge();
                     letters.remove(chosenLetter);
                     spil.txtUsedWords.setText(gl.getBrugteBogstaver().toString());
                     spil.txtHiddenWords.setText(gl.getSynligtOrd());
+
                 }
                 float x = finger.x - fingersPointOnLetter.x;
                 float y = finger.y - fingersPointOnLetter.y;
@@ -177,10 +175,11 @@ public class GalgeView extends View{
                 //game reset
                 if(gl.erSpilletVundet()){
                     spil.txtInfo.setText("Du har vundet! \nOrdet var "+ gl.getOrdet());
-                    main.playSound(R.raw.johncenaen_738owayt);
+                    main.playSound(R.raw.gamewon);
                 }
                 else if(gl.erSpilletTabt()){
                     spil.txtInfo.setText("Du har tabt! \nOrdet var " + gl.getOrdet());
+                    main.playSound(R.raw.gamelost);
                 }
                 spil.btnNewGame.setVisibility(View.VISIBLE);
                 gl.nulstil();
@@ -197,7 +196,7 @@ public class GalgeView extends View{
     private void drawLetter(Canvas c, float x, float y, Letter l) {
         RectF r = new RectF(l.r);
         r.offsetTo(x, y);
-        c.drawRect(r, lineType);
+        //c.drawRect(r, lineType);
         c.drawText(l.str, r.left, r.bottom, textType);
     }
 

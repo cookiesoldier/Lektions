@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.app.Fragment;
 import android.view.MenuItem;
 import android.view.Window;
+import android.widget.FrameLayout;
 
 import com.example.martinvieth.lektions.R;
 import com.example.martinvieth.lektions.logic.Galgelogik;
@@ -20,9 +21,12 @@ public class Activity_Main extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        requestWindowFeature(Window.FEATURE_ACTION_BAR);
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.akt_main);
+        FrameLayout fl = (FrameLayout) findViewById(R.id.fragWindow);
+        fl.setPadding(0,5,0,0);
 
         if (savedInstanceState == null) {
             Fragment fragment = new Frag_menu();
@@ -54,14 +58,15 @@ public class Activity_Main extends Activity {
         void stopMediaPlayer();
     }
 
+    private MediaPlayer mp;
 
     public void playSound(int id) {
-        MediaPlayer mp = MediaPlayer.create(this, id);
+        mp = MediaPlayer.create(this, id);
         mp.start();
     }
 
     public void stopMediaPlayer() {
-
+        if(mp != null) mp.stop();
     }
 
 
