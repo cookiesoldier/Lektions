@@ -24,15 +24,14 @@
         android:layout_below="@+id/btnOrd"
         android:layout_alignParentStart="true" />
 
-    <TextView
+    <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@id/btnOrd"
-        android:layout_marginTop="@dimen/activity_vertical_margin"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:id="@+id/hentOrdStatus"
-        android:layout_alignParentTop="true"
+        android:id="@+id/hentOrdUrl"
+        android:hint="Indtast URL"
+        android:layout_alignTop="@+id/btnOrd"
         android:layout_alignParentStart="true"
-        android:layout_alignParentEnd="true" />
+        android:layout_toStartOf="@+id/btnOrd" />
 
 </RelativeLayout>
