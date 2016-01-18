@@ -82,6 +82,9 @@ public class Frag_Galgespil extends Fragment implements View.OnClickListener, Sh
         FrameLayout fl = new FrameLayout(getActivity());
         TableLayout tl = new TableLayout(getActivity());
         galge = new ImageView(getActivity());
+
+        galge.setMinimumWidth(container.getWidth()/3);
+        galge.setMinimumHeight(container.getWidth()/3);
         galge.setImageResource(R.mipmap.galge);
         tl.addView(galge);
 
