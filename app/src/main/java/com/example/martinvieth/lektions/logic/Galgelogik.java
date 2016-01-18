@@ -1,5 +1,7 @@
 package com.example.martinvieth.lektions.logic;
 
+import com.example.martinvieth.lektions.ui.Frag_HentOrdFraDR;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -139,8 +141,8 @@ public class Galgelogik {
         return sb.toString();
     }
 
-    public ArrayList<String> hentOrdFraDr() throws Exception {
-        String data = hentUrl("http://dr.dk");
+    public ArrayList<String> hentOrdFraDr(String url) throws Exception {
+        String data = hentUrl(url);
         System.out.println("data = " + data);
 
         data = data.replaceAll("<.+?>", " ").toLowerCase().replaceAll("[^a-zæøå]", " ");
