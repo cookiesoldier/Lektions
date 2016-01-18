@@ -5,9 +5,11 @@ import android.app.Fragment;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.hardware.Sensor;
 import android.hardware.SensorManager;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -22,6 +24,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.martinvieth.lektions.R;
+import com.example.martinvieth.lektions.ThisApp;
 import com.example.martinvieth.lektions.helper.ShakeDetector;
 import com.example.martinvieth.lektions.logic.Galgelogik;
 
@@ -32,6 +35,7 @@ public class Frag_Galgespil extends Fragment implements View.OnClickListener, Sh
     private Sensor accelerometer;
     private GalgeView gv = null;
     private Activity_Main main;
+    private ThisApp app;
     protected static Galgelogik gl = null;
     protected TextView txtUsedLetters, txtInfo, txtHiddenWords;
     protected Button btnBack, btnNewGame;
@@ -50,6 +54,8 @@ public class Frag_Galgespil extends Fragment implements View.OnClickListener, Sh
         accelerometer = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
         shakeDetector = new ShakeDetector(this);
 
+        app = ThisApp.getInstance();
+
         if (gl == null) {
             gl = new Galgelogik();
         }
@@ -64,9 +70,14 @@ public class Frag_Galgespil extends Fragment implements View.OnClickListener, Sh
         RelativeLayout rl = new RelativeLayout(getActivity());
 
         btnMute = new ImageButton(getActivity());
-        btnMute.setImageResource(1);
+        btnMute.setOnClickListener(this);
         rl.addView(btnMute);
         rl.setGravity(Gravity.RIGHT);
+        if (!app.isMuted()){
+            btnMute.setImageResource(R.drawable.ic_volume_up_black_48dp);
+        }else{
+            btnMute.setImageResource(R.drawable.ic_volume_off_black_48dp);
+        }
 
         galge = new ImageView(getActivity());
         galge.setMinimumWidth(container.getWidth()/3);
@@ -162,6 +173,18 @@ public class Frag_Galgespil extends Fragment implements View.OnClickListener, Sh
                     .replace(R.id.fragWindow, new Frag_menu())
                     .addToBackStack(null)
                     .commit();
+        }
+        if (v == btnMute){
+            if (!app.isMuted()){
+                app.mute();
+                Log.d("btnMute", "Mute");
+                btnMute.setImageResource(R.drawable.ic_volume_off_black_48dp);
+            }  else {
+                app.unMute();
+                Log.d("btnMute", "unmute");
+                btnMute.setImageResource(R.drawable.ic_volume_up_black_48dp);
+            }
+
         }
     }
 
