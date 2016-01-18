@@ -8,12 +8,15 @@ import android.graphics.Color;
 import android.hardware.Sensor;
 import android.hardware.SensorManager;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.FrameLayout;
+import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TableLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -30,8 +33,9 @@ public class Frag_Galgespil extends Fragment implements View.OnClickListener, Sh
     private GalgeView gv = null;
     private Activity_Main main;
     protected static Galgelogik gl = null;
-    protected TextView txtUsedWords, txtInfo, txtHiddenWords;
+    protected TextView txtUsedLetters, txtInfo, txtHiddenWords;
     protected Button btnBack, btnNewGame;
+    protected ImageButton btnMute;
     protected ImageView galge;
     protected ViewGroup container;
 
@@ -57,7 +61,13 @@ public class Frag_Galgespil extends Fragment implements View.OnClickListener, Sh
 
         FrameLayout fl = new FrameLayout(getActivity());
         TableLayout tl = new TableLayout(getActivity());
-        
+        RelativeLayout rl = new RelativeLayout(getActivity());
+
+        btnMute = new ImageButton(getActivity());
+        btnMute.setImageResource(1);
+        rl.addView(btnMute);
+        rl.setGravity(Gravity.RIGHT);
+
         galge = new ImageView(getActivity());
         galge.setMinimumWidth(container.getWidth()/3);
         galge.setMinimumHeight(container.getWidth()/3);
@@ -73,10 +83,10 @@ public class Frag_Galgespil extends Fragment implements View.OnClickListener, Sh
         txtHiddenWords.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
         tl.addView(txtHiddenWords);
 
-        txtUsedWords = new TextView(getActivity());
-        txtUsedWords.setTextColor(Color.rgb(248, 248, 255));
-        txtUsedWords.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
-        tl.addView(txtUsedWords);
+        txtUsedLetters = new TextView(getActivity());
+        txtUsedLetters.setTextColor(Color.rgb(248, 248, 255));
+        txtUsedLetters.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+        tl.addView(txtUsedLetters);
 
         btnNewGame = new Button(getActivity());
         btnNewGame.setOnClickListener(this);
@@ -91,15 +101,16 @@ public class Frag_Galgespil extends Fragment implements View.OnClickListener, Sh
         System.out.println("btnBack w: " + btnBack.getWidth());
         tl.addView(btnBack);
 
-        txtUsedWords.setText(gl.getBrugteBogstaver().toString());
+        txtUsedLetters.setText(gl.getBrugteBogstaver().toString());
         txtHiddenWords.setText(gl.getSynligtOrd());
 
         fl.addView(tl);
+        fl.addView(rl);
         fl.addView(gv);
 
         txtInfo.setId(101);
         txtHiddenWords.setId(102);
-        txtUsedWords.setId(103);
+        txtUsedLetters.setId(103);
         galge.setId(104);
 
         return fl;
@@ -157,7 +168,7 @@ public class Frag_Galgespil extends Fragment implements View.OnClickListener, Sh
     private void nulstilSpil() {
         gl.nulstil();
         txtHiddenWords.setText("");
-        txtUsedWords.setText("");
+        txtUsedLetters.setText("");
         updateGalge();
     }
 

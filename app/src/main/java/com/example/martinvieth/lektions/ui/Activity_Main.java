@@ -18,6 +18,7 @@ import com.example.martinvieth.lektions.logic.Galgelogik;
 public class Activity_Main extends Activity {
 
     private static Galgelogik gl;
+    private MediaPlayer mp;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,13 +53,6 @@ public class Activity_Main extends Activity {
         NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
         return activeNetworkInfo != null && activeNetworkInfo.isConnected();
     }
-
-    interface AppMediaPlayer {
-        void playSound();
-        void stopMediaPlayer();
-    }
-
-    private MediaPlayer mp;
 
     public void playSound(int id) {
         mp = MediaPlayer.create(this, id);

@@ -160,7 +160,7 @@ public class GalgeView extends View{
                     gl.gætBogstav(chosenLetter.str);
                     spil.updateGalge();
                     letters.remove(chosenLetter);
-                    spil.txtUsedWords.setText(gl.getBrugteBogstaver().toString());
+                    spil.txtUsedLetters.setText(gl.getBrugteBogstaver().toString());
                     spil.txtHiddenWords.setText(gl.getSynligtOrd());
 
                 }
@@ -184,7 +184,7 @@ public class GalgeView extends View{
                 spil.btnNewGame.setVisibility(View.VISIBLE);
                 gl.nulstil();
                 spil.txtHiddenWords.setText("");
-                spil.txtUsedWords.setText("");
+                spil.txtUsedLetters.setText("");
             }
 
             chosenLetter = null;

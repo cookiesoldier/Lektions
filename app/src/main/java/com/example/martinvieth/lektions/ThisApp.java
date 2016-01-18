@@ -21,13 +21,6 @@ public class ThisApp extends Application {
         return app;
     }
 
-    public boolean isConnected() {
-        ConnectivityManager connectivityManager
-                = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
-        NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
-        return activeNetworkInfo != null && activeNetworkInfo.isConnected();
-    }
-
     public boolean isMuted() {
         return muted;
     }
