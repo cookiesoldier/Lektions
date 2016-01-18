@@ -11,20 +11,22 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
-import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.martinvieth.lektions.R;
+import com.example.martinvieth.lektions.logic.Galgelogik;
 
 import java.util.ArrayList;
 
 public class Frag_HentOrdFraDR extends Fragment implements View.OnClickListener{
 
-    //Tilføjer textview, knap og arraylist til at putte ord fra hentOrdFraDr() ind i
+    //Tilføjer textview, knap og arraylist til at putte ord fra hentOrd() ind i
     ListView ordFraUrl;
     EditText hentOrdUrl;
     Button btnOrd;
     ArrayList<String> ord = new ArrayList();
     String ordUrl;
+    Galgelogik gl;
 
     @Override
     public View onCreateView(LayoutInflater i, ViewGroup container, Bundle savedInstanceState) {
@@ -37,6 +39,10 @@ public class Frag_HentOrdFraDR extends Fragment implements View.OnClickListener{
         btnOrd = (Button) rod.findViewById(R.id.btnOrd);
         btnOrd.setOnClickListener(this);
 
+        if (gl == null) {
+            gl = new Galgelogik();
+        }
+
         return rod;
     }
 
@@ -46,13 +52,17 @@ public class Frag_HentOrdFraDR extends Fragment implements View.OnClickListener{
         //Knap-funktionalitet, henter ordene via getMuligeOrd(), putter dem ind i arraylist "ord"
         if (v == btnOrd) {
             ordUrl = String.valueOf(hentOrdUrl.getText());
+            if(ordUrl.startsWith("www")){
+                ordUrl = "http://"+hentOrdUrl.getText();
+            }
             AsyncTask asyncTask = new AsyncTask() {
                 @Override
                 protected Object doInBackground(Object... args0) {
                     try {
-                        Frag_Galgespil.getLogic().hentOrdFraDr(ordUrl);
+                        gl.hentOrd(ordUrl);
                     } catch (Exception e) {
                         e.printStackTrace();
+//                        Toast.makeText(getActivity(), "Der skete en fejl. Prøv igen", Toast.LENGTH_SHORT).show();
                     }
                     return "Success";
                 }
@@ -60,13 +70,13 @@ public class Frag_HentOrdFraDR extends Fragment implements View.OnClickListener{
 
                 @Override
                 protected void onPostExecute(Object resultat) {
-                    hentOrdUrl.setText("Ord hentet!");
+                    hentOrdUrl.setText("");
                 }
             };
             asyncTask.execute();
-            ord = Frag_Galgespil.getLogic().getMuligeOrd();
+            ord = gl.getMuligeOrd();
             ordFraUrl.setAdapter(new ArrayAdapter(getActivity(),
-                    android.R.layout.simple_list_item_1, android.R.id.text1, Frag_Galgespil.getLogic().getMuligeOrd()));
+                    android.R.layout.simple_list_item_1, android.R.id.text1, ord));
         }
     }
 }
