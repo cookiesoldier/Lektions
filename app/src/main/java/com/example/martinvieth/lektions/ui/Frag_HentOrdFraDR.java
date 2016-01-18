@@ -32,9 +32,6 @@ public class Frag_HentOrdFraDR extends Fragment implements View.OnClickListener{
     public View onCreateView(LayoutInflater i, ViewGroup container, Bundle savedInstanceState) {
         View rod = i.inflate(R.layout.frag_hent_ord_fra_dr, container, false);
 
-        if (gl == null){
-            gl = new Galgelogik();
-        }
 
         ordFraUrl = (ListView) rod.findViewById(R.id.ordFraDr);
         ordFraUrl.setClickable(true);
@@ -42,6 +39,10 @@ public class Frag_HentOrdFraDR extends Fragment implements View.OnClickListener{
         hentOrdUrl.setTextColor(Color.rgb(248, 248, 255));
         btnOrd = (Button) rod.findViewById(R.id.btnOrd);
         btnOrd.setOnClickListener(this);
+
+        if (gl == null){
+            gl = new Galgelogik();
+        }
 
         return rod;
     }
@@ -57,13 +58,16 @@ public class Frag_HentOrdFraDR extends Fragment implements View.OnClickListener{
             AsyncTask task = new AsyncTask() {
                 @Override
                 protected Object doInBackground(Object... args0) {
-
                     try {
                         gl.hentOrd(url);
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
                     return "Success";
+                }
+                @Override
+                protected void onPostExecute(Object resultat) {
+                    hentOrdUrl.setText("");
                 }
             };
             task.execute();
