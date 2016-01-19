@@ -39,7 +39,7 @@ public class Frag_menu extends Fragment implements View.OnClickListener {
         menuIV = (ImageView) rod.findViewById(R.id.imageView);
         menuIV.setMinimumWidth(width/3);
         menuIV.setMinimumHeight(width/3);
-        menuIV.setImageResource(R.mipmap.ic_launcher);
+        menuIV.setImageResource(R.mipmap.forkert6);
 
         btnWords = (Button) rod.findViewById(R.id.btnWords);
         btnWords.setText("Hent ord");
