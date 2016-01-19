@@ -175,10 +175,12 @@ public class GalgeView extends View{
                 if(gl.erSpilletVundet()){
                     spil.txtInfo.setText("Du har vundet! \nOrdet var "+ gl.getOrdet());
                     main.playSound(R.raw.gamewon);
+                    letters.clear();
                 }
                 else if(gl.erSpilletTabt()){
                     spil.txtInfo.setText("Du har tabt! \nOrdet var " + gl.getOrdet());
                     main.playSound(R.raw.gamelost);
+                    letters.clear();
                 }
                 spil.btnNewGame.setVisibility(View.VISIBLE);
                 gl.nulstil();
