@@ -1,5 +1,6 @@
 package com.example.martinvieth.lektions.ui;
 
+import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.app.Fragment;
 import android.content.Context;
@@ -7,11 +8,13 @@ import android.content.DialogInterface;
 import android.graphics.Color;
 import android.hardware.Sensor;
 import android.hardware.SensorManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewTreeObserver;
 import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
@@ -21,6 +24,8 @@ import android.widget.TableLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.daimajia.androidanimations.library.Techniques;
+import com.daimajia.androidanimations.library.YoYo;
 import com.example.martinvieth.lektions.R;
 import com.example.martinvieth.lektions.helper.ShakeDetector;
 import com.example.martinvieth.lektions.logic.Galgelogik;
@@ -59,7 +64,7 @@ public class Frag_Galgespil extends Fragment implements View.OnClickListener, Sh
             // gv = (GalgeView) findViewById(R.id.galgeView);
         }
 
-        FrameLayout fl = new FrameLayout(getActivity());
+        final FrameLayout fl = new FrameLayout(getActivity());
         TableLayout tl = new TableLayout(getActivity());
         RelativeLayout rl = new RelativeLayout(getActivity());
 
@@ -69,8 +74,8 @@ public class Frag_Galgespil extends Fragment implements View.OnClickListener, Sh
         rl.setGravity(Gravity.RIGHT);
 
         galge = new ImageView(getActivity());
-        galge.setMinimumWidth(container.getWidth()/3);
-        galge.setMinimumHeight(container.getWidth()/3);
+        galge.setMinimumWidth(container.getWidth() / 3);
+        galge.setMinimumHeight(container.getWidth() / 3);
         galge.setImageResource(R.mipmap.galge);
         tl.addView(galge);
 
@@ -112,6 +117,25 @@ public class Frag_Galgespil extends Fragment implements View.OnClickListener, Sh
         txtHiddenWords.setId(102);
         txtUsedLetters.setId(103);
         galge.setId(104);
+
+        fl.getViewTreeObserver().addOnGlobalLayoutListener(
+                new ViewTreeObserver.OnGlobalLayoutListener() {
+
+                    @SuppressLint("NewApi")
+                    @SuppressWarnings("deprecation")
+                    @Override
+                    public void onGlobalLayout() {
+                        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.JELLY_BEAN) {
+                            fl.getViewTreeObserver()
+                                    .removeGlobalOnLayoutListener(this);
+                        } else {
+                            fl.getViewTreeObserver()
+                                    .removeOnGlobalLayoutListener(this);
+                        }
+                        System.out.println("ONGLOBALLAYOUTLISTENE");
+                        YoYo.with(Techniques.Tada).duration(1000).playOn(btnNewGame);
+                    }
+                });
 
         return fl;
     }

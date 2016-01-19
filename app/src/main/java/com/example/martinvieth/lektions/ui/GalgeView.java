@@ -96,7 +96,6 @@ public class GalgeView extends View{
         float rectwidth = width/15;
         float rectheight = rectwidth;
 
-
         Random rand = new Random();
         left = rand.nextInt(width - (int) rectwidth);
         top = rand.nextInt(height/2) + height/2 - rectheight;
