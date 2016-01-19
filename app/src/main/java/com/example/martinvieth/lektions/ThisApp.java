@@ -3,6 +3,7 @@ package com.example.martinvieth.lektions;
 import android.app.Activity;
 import android.app.Application;
 import android.content.Context;
+import android.media.AudioManager;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 
@@ -17,7 +18,7 @@ public class ThisApp extends Application {
     private ThisApp() {
     }
 
-    public ThisApp getInstance() {
+    public static ThisApp getInstance() {
         return app;
     }
 
@@ -27,9 +28,17 @@ public class ThisApp extends Application {
 
     public void mute() {
         muted = true;
+       /*
+       AudioManager.setMode(AudioManager.MODE_IN_CALL);
+        AudioManager.setStreamSolo(AudioManager.STREAM_VOICE_CALL, true);
+        */
     }
 
     public void unMute() {
         muted = false;
+        /*
+        AudioManager.setStreamSolo(AudioManager.STREAM_VOICE_CALL, false);
+        AudioManager.setMode(AudioManager.MODE_NORMAL );
+        */
     }
 }
