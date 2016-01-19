@@ -12,6 +12,7 @@ import android.view.Window;
 import android.widget.FrameLayout;
 
 import com.example.martinvieth.lektions.R;
+import com.example.martinvieth.lektions.ThisApp;
 import com.example.martinvieth.lektions.logic.Galgelogik;
 
 
@@ -19,11 +20,13 @@ public class Activity_Main extends Activity {
 
     private static Galgelogik gl;
     private MediaPlayer mp;
+    private ThisApp app;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         super.onCreate(savedInstanceState);
+        app = ThisApp.getInstance();
 
         setContentView(R.layout.akt_main);
         FrameLayout fl = (FrameLayout) findViewById(R.id.fragWindow);
@@ -55,8 +58,10 @@ public class Activity_Main extends Activity {
     }
 
     public void playSound(int id) {
-        mp = MediaPlayer.create(this, id);
-        mp.start();
+        if (!app.isMuted()) {
+            mp = MediaPlayer.create(this, id);
+            mp.start();
+        }
     }
 
     public void stopMediaPlayer() {

@@ -3,6 +3,7 @@ package com.example.martinvieth.lektions;
 import android.app.Activity;
 import android.app.Application;
 import android.content.Context;
+import android.media.AudioManager;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 
@@ -17,7 +18,7 @@ public class ThisApp extends Application {
     private ThisApp() {
     }
 
-    public ThisApp getInstance() {
+    public static ThisApp getInstance() {
         return app;
     }
 
@@ -33,3 +34,5 @@ public class ThisApp extends Application {
         muted = false;
     }
 }
+
+
