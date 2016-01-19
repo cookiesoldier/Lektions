@@ -28,17 +28,11 @@ public class ThisApp extends Application {
 
     public void mute() {
         muted = true;
-       /*
-       AudioManager.setMode(AudioManager.MODE_IN_CALL);
-        AudioManager.setStreamSolo(AudioManager.STREAM_VOICE_CALL, true);
-        */
     }
 
     public void unMute() {
         muted = false;
-        /*
-        AudioManager.setStreamSolo(AudioManager.STREAM_VOICE_CALL, false);
-        AudioManager.setMode(AudioManager.MODE_NORMAL );
-        */
     }
 }
+
+

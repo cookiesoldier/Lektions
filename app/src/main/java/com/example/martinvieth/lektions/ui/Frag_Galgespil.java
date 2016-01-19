@@ -8,6 +8,7 @@ import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.hardware.Sensor;
 import android.hardware.SensorManager;
+import android.media.AudioManager;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Gravity;
@@ -39,8 +40,7 @@ public class Frag_Galgespil extends Fragment implements View.OnClickListener, Sh
     protected static Galgelogik gl = null;
     protected TextView txtUsedLetters, txtInfo, txtHiddenWords;
     protected Button btnBack, btnNewGame;
-    protected ImageButton btnMute;
-    protected ImageView galge;
+    protected ImageView galge, btnMute;
     protected ViewGroup container;
 
     @Override
@@ -69,7 +69,7 @@ public class Frag_Galgespil extends Fragment implements View.OnClickListener, Sh
         TableLayout tl = new TableLayout(getActivity());
         RelativeLayout rl = new RelativeLayout(getActivity());
 
-        btnMute = new ImageButton(getActivity());
+        btnMute = new ImageView(getActivity());
         btnMute.setOnClickListener(this);
         rl.addView(btnMute);
         rl.setGravity(Gravity.RIGHT);
