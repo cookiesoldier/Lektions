@@ -60,7 +60,7 @@ public class GalgeView extends View{
 
     private void init() {
 
-        Typeface font = Typeface.createFromAsset(spil.getActivity().getAssets(), "athletic.ttf");
+        Typeface font = Typeface.createFromAsset(spil.getActivity().getAssets(), "Beatnik Plain.ttf");
         textType.setTypeface(font);
         textType.setColor(Color.parseColor("#000080"));
         textType.setTextSize(spil.container.getWidth() / 11);
