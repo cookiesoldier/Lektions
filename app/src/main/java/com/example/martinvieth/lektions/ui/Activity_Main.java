@@ -27,6 +27,7 @@ public class Activity_Main extends FragmentActivity {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         super.onCreate(savedInstanceState);
         app = ThisApp.getInstance();
+        ThisApp.setMain(this);
 
         setContentView(R.layout.akt_main);
         FrameLayout fl = (FrameLayout) findViewById(R.id.fragWindow);
@@ -66,11 +67,7 @@ public class Activity_Main extends FragmentActivity {
     }
 
     public boolean isPlaying(){
-        if (mp != null && mp.isPlaying()){
-            return true;
-        } else {
-            return false;
-        }
+        return mp != null && mp.isPlaying();
     }
 
     public void stopMediaPlayer() {
@@ -78,13 +75,9 @@ public class Activity_Main extends FragmentActivity {
         mp = null;
     }
 
-    public void pauseMediaPlayer() {
-        if(mp != null) mp.pause();
-    }
+    public void pauseMediaPlayer() { if(isPlaying()) mp.pause(); }
 
-    public void continueMediaPlayer() {
-        //mp.
-    }
+    public void continueMediaPlayer() { if(!isPlaying()) mp.start(); }
 
 
 

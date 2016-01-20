@@ -30,7 +30,9 @@ public class Frag_info extends Fragment implements View.OnClickListener{
         tv = new TextView(getActivity());
         tv.setTextSize(17);
         tv.setTextColor(Color.rgb(248, 248, 255));
-        tv.setText("Der er et lille udvalg af ord, som du kan spille med. \n \nVil du have flere ord, kan du trykke på Hent Ord-knappen.");
+        tv.setText("Der er et lille udvalg af ord, som du kan spille med. \n" +
+                " \nVil du have flere ord, kan du trykke på Hent Ord-knappen. \n" +
+                "\n For at spille, skal du trække det bogstav, du vil gætte på, op på billedet af galgen.");
 
         tl.addView(tv);
         tl.addView(btnBack);

@@ -18,7 +18,7 @@ public class ThisApp extends Application {
 
     private static ThisApp app = new ThisApp();
     private static Galgelogik gl = null;
-    private boolean muted = false;
+    private static boolean muted = false;
     private static Activity_Main main;
 
     private ThisApp() {
@@ -26,6 +26,10 @@ public class ThisApp extends Application {
 
     public static void setMain(Activity_Main main) {
         ThisApp.main = main;
+    }
+
+    public static Activity_Main getMain() {
+        return main;
     }
 
     public static ThisApp getInstance() {

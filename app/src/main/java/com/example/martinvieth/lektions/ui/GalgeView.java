@@ -14,6 +14,7 @@ import android.view.MotionEvent;
 import android.view.View;
 
 import com.example.martinvieth.lektions.R;
+import com.example.martinvieth.lektions.ThisApp;
 import com.example.martinvieth.lektions.logic.Galgelogik;
 
 import java.util.ArrayList;
@@ -39,7 +40,7 @@ public class GalgeView extends View{
         super(c);
         main = (Activity_Main) c;
         this.spil = spil;
-        gl = Frag_Galgespil.gl;
+        gl = ThisApp.getLogicInstance();
         textType = new Paint();
         lineType = new Paint();
         letters = new ArrayList<>();
@@ -64,7 +65,7 @@ public class GalgeView extends View{
         Typeface font = Typeface.createFromAsset(spil.getActivity().getAssets(), "JLSSpaceGothicC_NC.otf");
         textType.setTypeface(font);
         textType.setColor(Color.parseColor("#000080"));
-        textType.setTextSize(spil.container.getWidth() / 11);
+        textType.setTextSize(spil.container.getWidth() / 8);
         textType.setAntiAlias(true);
         textType.setStyle(Paint.Style.FILL);
         lineType.setColor(Color.BLACK);
@@ -94,7 +95,7 @@ public class GalgeView extends View{
         float bottom;
         int height = spil.container.getHeight();
         int width = spil.container.getWidth();
-        float rectwidth = width/15;
+        float rectwidth = width/11;
         float rectheight = rectwidth;
 
         Random rand = new Random();
@@ -200,7 +201,7 @@ public class GalgeView extends View{
     private void drawLetter(Canvas c, float x, float y, Letter l) {
         RectF r = new RectF(l.r);
         r.offsetTo(x, y);
-        //c.drawRect(r, lineType);
+        c.drawRect(r, lineType);
         c.drawText(l.str, r.left, r.bottom, textType);
     }
 

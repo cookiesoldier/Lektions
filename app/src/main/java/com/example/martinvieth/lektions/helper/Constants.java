@@ -5,6 +5,6 @@ package com.example.martinvieth.lektions.helper;
  */
 public final class Constants {
 
-    public static final String HENT_ORD_SERVICE = "";
+    public static final String HENT_ORD_SERVICE = "dineorderloadedfaerdig";
 
 }

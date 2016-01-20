@@ -12,9 +12,9 @@ import java.util.HashSet;
 import java.util.Random;
 
 public class Galgelogik {
-    private ArrayList<String> muligeOrd = new ArrayList<String>();
+    private ArrayList<String> muligeOrd = new ArrayList<>();
     private String ordet;
-    private ArrayList<String> brugteBogstaver = new ArrayList<String>();
+    private ArrayList<String> brugteBogstaver = new ArrayList<>();
     private String synligtOrd;
     private int antalForkerteBogstaver;
     private boolean sidsteBogstavVarKorrekt;
@@ -134,7 +134,7 @@ public class Galgelogik {
         StringBuilder sb = new StringBuilder();
         String linje = br.readLine();
         while (linje != null) {
-            sb.append(linje + "\n");
+            sb.append(linje).append("\n");
             linje = br.readLine();
         }
         return sb.toString();
@@ -147,9 +147,9 @@ public class Galgelogik {
         data = data.replaceAll("<.+?>", " ").toLowerCase().replaceAll("[^a-zæøå]", " ");
         //System.out.println("data = " + data);
         muligeOrd.clear();
-        muligeOrd.addAll(new HashSet<String>(Arrays.asList(data.split(" "))));
+        muligeOrd.addAll(new HashSet<>(Arrays.asList(data.split(" "))));
 
-        /*
+
         ArrayList<String> ordDerSkalFjernes = new ArrayList<>();
         for (String i: muligeOrd) {
             if(!i.toLowerCase().matches("[^aeiouyæøå]")){
@@ -157,7 +157,7 @@ public class Galgelogik {
             }
         }
         muligeOrd.removeAll(ordDerSkalFjernes);
-        */
+
 
         System.out.println("muligeOrd = " + muligeOrd);
         nulstil();
@@ -166,10 +166,4 @@ public class Galgelogik {
 
     }
 
-    public boolean containsVowel(String word) {
-        if(word.toLowerCase().matches("[^aeiouyæøå]")) {
-
-        }
-        return false;
-    }
 }

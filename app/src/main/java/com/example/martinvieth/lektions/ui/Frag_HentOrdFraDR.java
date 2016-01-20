@@ -1,12 +1,17 @@
 package com.example.martinvieth.lektions.ui;
 
+import android.app.IntentService;
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.net.Uri;
 import android.support.v4.app.Fragment;
 import android.app.ProgressDialog;
 import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.v4.content.LocalBroadcastManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,6 +24,7 @@ import android.widget.Toast;
 
 import com.example.martinvieth.lektions.R;
 import com.example.martinvieth.lektions.ThisApp;
+import com.example.martinvieth.lektions.helper.Constants;
 import com.example.martinvieth.lektions.logic.Galgelogik;
 import com.example.martinvieth.lektions.service.HentOrdService;
 
@@ -34,6 +40,23 @@ public class Frag_HentOrdFraDR extends Fragment implements View.OnClickListener{
     Galgelogik gl;
     String url;
     private ProgressDialog progress;
+
+    private class HentOrdBroadcastReceiver extends BroadcastReceiver {
+
+        private HentOrdBroadcastReceiver() {
+
+        }
+
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            gl = ThisApp.getLogicInstance();
+            hentOrdUrl.setText("");
+            dismissLoadingDialog();
+            ord = gl.getMuligeOrd();
+            ArrayAdapter<String> itemsAdapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_list_item_1, ord);
+            ordFraUrl.setAdapter(itemsAdapter);
+        }
+    }
 
     @Override
     public View onCreateView(LayoutInflater i, ViewGroup container, Bundle savedInstanceState) {
@@ -51,6 +74,10 @@ public class Frag_HentOrdFraDR extends Fragment implements View.OnClickListener{
         if (gl == null){
             gl = ThisApp.getLogicInstance();
         }
+
+        IntentFilter intentFilter = new IntentFilter(Constants.HENT_ORD_SERVICE);
+        HentOrdBroadcastReceiver rec = new HentOrdBroadcastReceiver();
+        LocalBroadcastManager.getInstance(getActivity()).registerReceiver(rec, intentFilter);
 
         return rod;
     }
@@ -87,7 +114,6 @@ public class Frag_HentOrdFraDR extends Fragment implements View.OnClickListener{
             Intent serviceIntent;
             serviceIntent = new Intent(getActivity(), HentOrdService.class);
             serviceIntent.setData(Uri.parse(url));
-
             getActivity().startService(serviceIntent);
 
             /*
@@ -103,11 +129,7 @@ public class Frag_HentOrdFraDR extends Fragment implements View.OnClickListener{
                 }
                 @Override
                 protected void onPostExecute(Object resultat) {
-                    hentOrdUrl.setText("");
-                    dismissLoadingDialog();
-                    ord = gl.getMuligeOrd();
-                    ArrayAdapter<String> itemsAdapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1, ord);
-                    ordFraUrl.setAdapter(itemsAdapter);
+
                 }
             };
             task.execute();

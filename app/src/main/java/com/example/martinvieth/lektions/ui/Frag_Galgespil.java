@@ -1,21 +1,18 @@
 package com.example.martinvieth.lektions.ui;
 
-import android.annotation.SuppressLint;
 import android.app.AlertDialog;
-import android.support.v4.app.Fragment;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.graphics.Color;
 import android.hardware.Sensor;
 import android.hardware.SensorManager;
-import android.os.Build;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.ViewTreeObserver;
 import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
@@ -24,8 +21,6 @@ import android.widget.TableLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.daimajia.androidanimations.library.Techniques;
-import com.daimajia.androidanimations.library.YoYo;
 import com.example.martinvieth.lektions.R;
 import com.example.martinvieth.lektions.ThisApp;
 import com.example.martinvieth.lektions.helper.ShakeDetector;
@@ -33,7 +28,7 @@ import com.example.martinvieth.lektions.logic.Galgelogik;
 
 public class Frag_Galgespil extends Fragment implements View.OnClickListener, ShakeDetector.OnShakeListener {
 
-    public static Galgelogik gl = null;
+    private Galgelogik gl = null;
     private ShakeDetector shakeDetector;
     private SensorManager sensorManager;
     private Sensor accelerometer;
@@ -123,25 +118,6 @@ public class Frag_Galgespil extends Fragment implements View.OnClickListener, Sh
         txtUsedLetters.setId(103);
         galge.setId(104);
 
-        fl.getViewTreeObserver().addOnGlobalLayoutListener(
-                new ViewTreeObserver.OnGlobalLayoutListener() {
-
-                    @SuppressLint("NewApi")
-                    @SuppressWarnings("deprecation")
-                    @Override
-                    public void onGlobalLayout() {
-                        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.JELLY_BEAN) {
-                            fl.getViewTreeObserver()
-                                    .removeGlobalOnLayoutListener(this);
-                        } else {
-                            fl.getViewTreeObserver()
-                                    .removeOnGlobalLayoutListener(this);
-                        }
-                        System.out.println("ONGLOBALLAYOUTLISTENE");
-                        YoYo.with(Techniques.Tada).duration(1000).playOn(btnNewGame);
-                    }
-                });
-
         return fl;
     }
 
@@ -163,10 +139,6 @@ public class Frag_Galgespil extends Fragment implements View.OnClickListener, Sh
     public void onStop() {
         super.onStop();
         main.stopMediaPlayer();
-    }
-
-    public static Galgelogik getLogic() {
-        return gl;
     }
 
     public void onClick(View v) {
