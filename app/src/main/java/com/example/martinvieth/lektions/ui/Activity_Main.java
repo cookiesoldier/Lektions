@@ -51,6 +51,7 @@ public class Activity_Main extends FragmentActivity {
             onBackPressed(); // brugeren vil navigere op i hierakiet
         }
         return super.onOptionsItemSelected(item);
+
     }
 
     public boolean isNetworkAvailable() {
