@@ -12,7 +12,7 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Vis ord"
+        android:text="Hent"
         android:id="@+id/btnOrd"
         android:layout_alignParentTop="true"
         android:layout_alignEnd="@+id/ordFraDr" />

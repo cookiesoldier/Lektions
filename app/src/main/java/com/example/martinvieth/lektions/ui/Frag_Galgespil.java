@@ -281,6 +281,12 @@ public class Frag_Galgespil extends Fragment implements View.OnClickListener, Sh
         if (gl.getAntalForkerteBogstaver() == 6) {
             galge.setImageResource(R.mipmap.forkert6);
         }
+        if (gl.getAntalForkerteBogstaver() == 7){
+            galge.setImageResource(R.mipmap.gravsten);
+        }
+        if (gl.erSpilletVundet()== true){
+            galge.setImageResource(R.mipmap.won);
+        }
     }
 
 }

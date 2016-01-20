@@ -34,6 +34,7 @@ public class GalgeView extends View{
     private Paint lineType;
     private Activity_Main main;
 
+
     public GalgeView(Context c, Frag_Galgespil spil) {
         super(c);
         main = (Activity_Main) c;
@@ -176,11 +177,13 @@ public class GalgeView extends View{
                     spil.txtInfo.setText("Du har vundet! \nOrdet var "+ gl.getOrdet());
                     main.stopMediaPlayer();
                     main.playSound(R.raw.gamewon);
+                    letters.clear();
                 }
                 else if(gl.erSpilletTabt()){
                     spil.txtInfo.setText("Du har tabt! \nOrdet var " + gl.getOrdet());
                     main.stopMediaPlayer();
                     main.playSound(R.raw.gamelost);
+                    letters.clear();
                 }
                 spil.btnNewGame.setVisibility(View.VISIBLE);
                 gl.nulstil();

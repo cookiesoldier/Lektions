@@ -3,6 +3,7 @@ package com.example.martinvieth.lektions.ui;
 import android.content.Intent;
 import android.net.Uri;
 import android.support.v4.app.Fragment;
+import android.app.ProgressDialog;
 import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -13,6 +14,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.example.martinvieth.lektions.R;
@@ -31,6 +33,7 @@ public class Frag_HentOrdFraDR extends Fragment implements View.OnClickListener{
     ArrayList<String> ord = new ArrayList<>();
     Galgelogik gl;
     String url;
+    private ProgressDialog progress;
 
     @Override
     public View onCreateView(LayoutInflater i, ViewGroup container, Bundle savedInstanceState) {
@@ -43,6 +46,7 @@ public class Frag_HentOrdFraDR extends Fragment implements View.OnClickListener{
         hentOrdUrl.setTextColor(Color.rgb(248, 248, 255));
         btnOrd = (Button) rod.findViewById(R.id.btnOrd);
         btnOrd.setOnClickListener(this);
+        dismissLoadingDialog();
 
         if (gl == null){
             gl = ThisApp.getLogicInstance();
@@ -51,10 +55,30 @@ public class Frag_HentOrdFraDR extends Fragment implements View.OnClickListener{
         return rod;
     }
 
+    public void showLoadingDialog() {
+
+        if (progress == null) {
+            progress = new ProgressDialog(getActivity());
+            progress.setTitle("Loading");
+            progress.setMessage("Henter ord..");
+        }
+        progress.show();
+    }
+
+
+    public void dismissLoadingDialog() {
+
+        if (progress != null && progress.isShowing()) {
+            progress.dismiss();
+        }
+    }
+
     @Override
     public void onClick(View v) {
 
         if (v == btnOrd) {
+            gl.getMuligeOrd();
+            showLoadingDialog();
             url = String.valueOf(hentOrdUrl.getText());
             if(url.startsWith("www")){
                 url = "http://"+hentOrdUrl.getText();
@@ -80,6 +104,10 @@ public class Frag_HentOrdFraDR extends Fragment implements View.OnClickListener{
                 @Override
                 protected void onPostExecute(Object resultat) {
                     hentOrdUrl.setText("");
+                    dismissLoadingDialog();
+                    ord = gl.getMuligeOrd();
+                    ArrayAdapter<String> itemsAdapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1, ord);
+                    ordFraUrl.setAdapter(itemsAdapter);
                 }
             };
             task.execute();

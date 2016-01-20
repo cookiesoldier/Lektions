@@ -28,6 +28,8 @@ public class Activity_Main extends FragmentActivity {
         super.onCreate(savedInstanceState);
         app = ThisApp.getInstance();
         ThisApp.setMain(this);
+        playSound(R.raw.arnold);
+        mp.setLooping(true);
 
         setContentView(R.layout.akt_main);
         FrameLayout fl = (FrameLayout) findViewById(R.id.fragWindow);
