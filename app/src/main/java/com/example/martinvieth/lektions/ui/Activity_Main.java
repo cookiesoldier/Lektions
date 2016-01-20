@@ -19,7 +19,7 @@ import com.example.martinvieth.lektions.logic.Galgelogik;
 public class Activity_Main extends FragmentActivity {
 
     private static Galgelogik gl;
-    private MediaPlayer mp;
+    MediaPlayer mp;
     private ThisApp app;
 
     @Override
@@ -27,9 +27,6 @@ public class Activity_Main extends FragmentActivity {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         super.onCreate(savedInstanceState);
         app = ThisApp.getInstance();
-        ThisApp.setMain(this);
-        playSound(R.raw.arnold);
-        mp.setLooping(true);
 
         setContentView(R.layout.akt_main);
         FrameLayout fl = (FrameLayout) findViewById(R.id.fragWindow);
@@ -65,6 +62,14 @@ public class Activity_Main extends FragmentActivity {
         if (!app.isMuted()) {
             mp = MediaPlayer.create(this, id);
             mp.start();
+        }
+    }
+
+    public boolean isPlaying(){
+        if (mp != null && mp.isPlaying()){
+            return true;
+        } else {
+            return false;
         }
     }
 

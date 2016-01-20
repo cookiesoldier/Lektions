@@ -149,6 +149,7 @@ public class Frag_Galgespil extends Fragment implements View.OnClickListener, Sh
     public void onResume() {
         super.onResume();
         sensorManager.registerListener(shakeDetector, accelerometer, SensorManager.SENSOR_DELAY_UI);
+
     }
 
     @Override
@@ -179,6 +180,9 @@ public class Frag_Galgespil extends Fragment implements View.OnClickListener, Sh
 
         if (v == btnNewGame) {
             gl.nulstil();
+            if(!(main.isPlaying())) {
+                main.playSound(R.raw.arnold);
+            }
             getFragmentManager().beginTransaction()
                     .replace(R.id.fragWindow, new Frag_Galgespil())
                     .addToBackStack(null)
@@ -235,6 +239,7 @@ public class Frag_Galgespil extends Fragment implements View.OnClickListener, Sh
                 switch (which) {
                     case DialogInterface.BUTTON_POSITIVE:
                         nulstilSpil();
+                        main.playSound(R.raw.arnold);
                         getFragmentManager().beginTransaction()
                                 .replace(R.id.fragWindow, new Frag_Galgespil())
                                 .addToBackStack(null)

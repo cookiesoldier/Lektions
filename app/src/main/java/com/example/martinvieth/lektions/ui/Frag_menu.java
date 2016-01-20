@@ -20,11 +20,17 @@ public class Frag_menu extends Fragment implements View.OnClickListener {
 
     Button btnNewGame, btnInfo, btnWords;
     ImageView menuIV;
+    Activity_Main main;
 
 
     public View onCreateView(LayoutInflater i, ViewGroup container, Bundle savedInstanceState) {
         View rod = i.inflate(R.layout.frag_menu, container, false);
 
+        main = (Activity_Main) getActivity();
+        if(!main.isPlaying()) {
+            main.playSound(R.raw.arnold);
+            main.mp.setLooping(true);
+        }
         Display display = getActivity().getWindowManager().getDefaultDisplay();
         Point size = new Point();
         display.getSize(size);
@@ -32,13 +38,12 @@ public class Frag_menu extends Fragment implements View.OnClickListener {
         int height = size.y;
 
 
-
         btnNewGame = (Button) rod.findViewById(R.id.btnNewGame);
         btnNewGame.setText("Nyt spil");
 
         menuIV = (ImageView) rod.findViewById(R.id.imageView);
-        menuIV.setMinimumWidth(width/3);
-        menuIV.setMinimumHeight(width/3);
+        menuIV.setMinimumWidth(width / 3);
+        menuIV.setMinimumHeight(width / 3);
         menuIV.setImageResource(R.mipmap.forkert6);
 
         btnWords = (Button) rod.findViewById(R.id.btnWords);
