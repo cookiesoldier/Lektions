@@ -27,6 +27,8 @@ public class Activity_Main extends Activity {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         super.onCreate(savedInstanceState);
         app = ThisApp.getInstance();
+        playSound(R.raw.arnold);
+        mp.setLooping(true);
 
         setContentView(R.layout.akt_main);
         FrameLayout fl = (FrameLayout) findViewById(R.id.fragWindow);

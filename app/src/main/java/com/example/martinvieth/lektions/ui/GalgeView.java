@@ -34,6 +34,7 @@ public class GalgeView extends View{
     private Paint lineType;
     private Activity_Main main;
 
+
     public GalgeView(Context c, Frag_Galgespil spil) {
         super(c);
         main = (Activity_Main) c;
