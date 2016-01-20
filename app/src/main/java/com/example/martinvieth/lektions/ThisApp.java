@@ -7,19 +7,36 @@ import android.media.AudioManager;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 
+import com.example.martinvieth.lektions.logic.Galgelogik;
+import com.example.martinvieth.lektions.ui.Activity_Main;
+import com.example.martinvieth.lektions.ui.Frag_Galgespil;
+
 /**
  * Created by thomas on 18/01/16.
  */
 public class ThisApp extends Application {
 
     private static ThisApp app = new ThisApp();
+    private static Galgelogik gl = null;
     private boolean muted = false;
+    private static Activity_Main main;
 
     private ThisApp() {
     }
 
+    public static void setMain(Activity_Main main) {
+        ThisApp.main = main;
+    }
+
     public static ThisApp getInstance() {
         return app;
+    }
+
+    public static Galgelogik getLogicInstance() {
+        if(gl == null) {
+            gl = new Galgelogik();
+        }
+        return gl;
     }
 
     public boolean isMuted() {
@@ -32,6 +49,10 @@ public class ThisApp extends Application {
 
     public void unMute() {
         muted = false;
+    }
+
+    public boolean isNetworkAvailable() {
+       return main.isNetworkAvailable();
     }
 }
 

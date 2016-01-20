@@ -2,11 +2,10 @@ package com.example.martinvieth.lektions.ui;
 
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
-import android.app.Fragment;
+import android.support.v4.app.Fragment;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.graphics.Color;
-import android.graphics.drawable.Drawable;
 import android.hardware.Sensor;
 import android.hardware.SensorManager;
 import android.os.Build;
@@ -19,7 +18,6 @@ import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 import android.widget.Button;
 import android.widget.FrameLayout;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TableLayout;
@@ -35,13 +33,13 @@ import com.example.martinvieth.lektions.logic.Galgelogik;
 
 public class Frag_Galgespil extends Fragment implements View.OnClickListener, ShakeDetector.OnShakeListener {
 
+    public static Galgelogik gl = null;
     private ShakeDetector shakeDetector;
     private SensorManager sensorManager;
     private Sensor accelerometer;
     private GalgeView gv = null;
     private Activity_Main main;
     private ThisApp app;
-    protected static Galgelogik gl = null;
     protected TextView txtUsedLetters, txtInfo, txtHiddenWords;
     protected Button btnBack, btnNewGame;
     protected ImageView galge, btnMute;
@@ -59,10 +57,7 @@ public class Frag_Galgespil extends Fragment implements View.OnClickListener, Sh
         shakeDetector = new ShakeDetector(this);
 
         app = ThisApp.getInstance();
-
-        if (gl == null) {
-            gl = new Galgelogik();
-        }
+        gl = ThisApp.getLogicInstance();
 
         if (gv == null) {
             gv = new GalgeView(getActivity(), this);
@@ -200,6 +195,7 @@ public class Frag_Galgespil extends Fragment implements View.OnClickListener, Sh
         if (v == btnMute){
             if (!app.isMuted()){
                 app.mute();
+                main.stopMediaPlayer();
                 Log.d("btnMute", "Mute");
                 btnMute.setImageResource(R.drawable.ic_volume_off_black_48dp);
             }  else {

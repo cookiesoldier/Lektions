@@ -1,6 +1,8 @@
 package com.example.martinvieth.lektions.ui;
 
-import android.app.Fragment;
+import android.content.Intent;
+import android.net.Uri;
+import android.support.v4.app.Fragment;
 import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -14,7 +16,9 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import com.example.martinvieth.lektions.R;
+import com.example.martinvieth.lektions.ThisApp;
 import com.example.martinvieth.lektions.logic.Galgelogik;
+import com.example.martinvieth.lektions.service.HentOrdService;
 
 import java.util.ArrayList;
 
@@ -41,7 +45,7 @@ public class Frag_HentOrdFraDR extends Fragment implements View.OnClickListener{
         btnOrd.setOnClickListener(this);
 
         if (gl == null){
-            gl = new Galgelogik();
+            gl = ThisApp.getLogicInstance();
         }
 
         return rod;
@@ -55,6 +59,14 @@ public class Frag_HentOrdFraDR extends Fragment implements View.OnClickListener{
             if(url.startsWith("www")){
                 url = "http://"+hentOrdUrl.getText();
             }
+
+            Intent serviceIntent;
+            serviceIntent = new Intent(getActivity(), HentOrdService.class);
+            serviceIntent.setData(Uri.parse(url));
+
+            getActivity().startService(serviceIntent);
+
+            /*
             AsyncTask task = new AsyncTask() {
                 @Override
                 protected Object doInBackground(Object... args0) {
@@ -71,6 +83,8 @@ public class Frag_HentOrdFraDR extends Fragment implements View.OnClickListener{
                 }
             };
             task.execute();
+            */
+
             ord = gl.getMuligeOrd();
             ordFraUrl.setAdapter(new ArrayAdapter<>(getActivity(), android.R.layout.simple_list_item_1, android.R.id.text1, ord));
         }

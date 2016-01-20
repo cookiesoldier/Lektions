@@ -20,6 +20,7 @@ public class Galgelogik {
     private boolean sidsteBogstavVarKorrekt;
     private boolean spilletErVundet;
     private boolean spilletErTabt;
+    private static int instances = 0;
 
 
     public ArrayList<String> getBrugteBogstaver() {
@@ -59,15 +60,15 @@ public class Galgelogik {
     }
 
     public Galgelogik() {
-        muligeOrd.add("bil");
-        muligeOrd.add("computer");
-        muligeOrd.add("programmering");
-        muligeOrd.add("motorvej");
-        muligeOrd.add("busrute");
-        muligeOrd.add("gangsti");
-        muligeOrd.add("skovsnegl");
-        muligeOrd.add("solsort");
-        nulstil();
+            muligeOrd.add("bil");
+            muligeOrd.add("computer");
+            muligeOrd.add("programmering");
+            muligeOrd.add("motorvej");
+            muligeOrd.add("busrute");
+            muligeOrd.add("gangsti");
+            muligeOrd.add("skovsnegl");
+            muligeOrd.add("solsort");
+            nulstil();
     }
 
     public void nulstil() {
@@ -78,7 +79,6 @@ public class Galgelogik {
         ordet = muligeOrd.get(new Random().nextInt(muligeOrd.size()));
         opdaterSynligtOrd();
     }
-
 
     private void opdaterSynligtOrd() {
         synligtOrd = "";
@@ -129,7 +129,6 @@ public class Galgelogik {
         System.out.println("---------- ");
     }
 
-
     public static String hentUrl(String url) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(new URL(url).openStream()));
         StringBuilder sb = new StringBuilder();
@@ -143,21 +142,34 @@ public class Galgelogik {
 
     public ArrayList<String> hentOrd(String input) throws Exception {
         String data = hentUrl(input);
-        System.out.println("data = " + data);
+        //System.out.println("data = " + data);
 
         data = data.replaceAll("<.+?>", " ").toLowerCase().replaceAll("[^a-zæøå]", " ");
-        System.out.println("data = " + data);
+        //System.out.println("data = " + data);
         muligeOrd.clear();
         muligeOrd.addAll(new HashSet<String>(Arrays.asList(data.split(" "))));
 
+        /*
+        ArrayList<String> ordDerSkalFjernes = new ArrayList<>();
         for (String i: muligeOrd) {
-            if(!i.matches("[aeiouyæøå]+")){
-                muligeOrd.remove(i);
+            if(!i.toLowerCase().matches("[^aeiouyæøå]")){
+                ordDerSkalFjernes.add(i);
             }
         }
+        muligeOrd.removeAll(ordDerSkalFjernes);
+        */
 
         System.out.println("muligeOrd = " + muligeOrd);
         nulstil();
         return null;
+
+
+    }
+
+    public boolean containsVowel(String word) {
+        if(word.toLowerCase().matches("[^aeiouyæøå]")) {
+
+        }
+        return false;
     }
 }

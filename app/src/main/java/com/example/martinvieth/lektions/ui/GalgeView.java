@@ -60,7 +60,7 @@ public class GalgeView extends View{
 
     private void init() {
 
-        Typeface font = Typeface.createFromAsset(spil.getActivity().getAssets(), "athletic.ttf");
+        Typeface font = Typeface.createFromAsset(spil.getActivity().getAssets(), "JLSSpaceGothicC_NC.otf");
         textType.setTypeface(font);
         textType.setColor(Color.parseColor("#000080"));
         textType.setTextSize(spil.container.getWidth() / 11);
@@ -174,10 +174,12 @@ public class GalgeView extends View{
                 //game reset
                 if(gl.erSpilletVundet()){
                     spil.txtInfo.setText("Du har vundet! \nOrdet var "+ gl.getOrdet());
+                    main.stopMediaPlayer();
                     main.playSound(R.raw.gamewon);
                 }
                 else if(gl.erSpilletTabt()){
                     spil.txtInfo.setText("Du har tabt! \nOrdet var " + gl.getOrdet());
+                    main.stopMediaPlayer();
                     main.playSound(R.raw.gamelost);
                 }
                 spil.btnNewGame.setVisibility(View.VISIBLE);

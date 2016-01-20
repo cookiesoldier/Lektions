@@ -3,7 +3,7 @@ package com.example.martinvieth.lektions.ui;
 import android.graphics.Point;
 import android.media.Image;
 import android.os.Bundle;
-import android.app.Fragment;
+import android.support.v4.app.Fragment;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.Display;

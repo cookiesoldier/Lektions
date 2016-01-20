@@ -1,12 +1,12 @@
 package com.example.martinvieth.lektions.ui;
 
-import android.app.Activity;
+import android.support.v4.app.FragmentActivity;
 import android.content.Context;
 import android.media.MediaPlayer;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
-import android.app.Fragment;
+import android.support.v4.app.Fragment;
 import android.view.MenuItem;
 import android.view.Window;
 import android.widget.FrameLayout;
@@ -16,7 +16,7 @@ import com.example.martinvieth.lektions.ThisApp;
 import com.example.martinvieth.lektions.logic.Galgelogik;
 
 
-public class Activity_Main extends Activity {
+public class Activity_Main extends FragmentActivity {
 
     private static Galgelogik gl;
     private MediaPlayer mp;
@@ -27,6 +27,7 @@ public class Activity_Main extends Activity {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         super.onCreate(savedInstanceState);
         app = ThisApp.getInstance();
+        ThisApp.setMain(this);
 
         setContentView(R.layout.akt_main);
         FrameLayout fl = (FrameLayout) findViewById(R.id.fragWindow);
@@ -34,7 +35,7 @@ public class Activity_Main extends Activity {
 
         if (savedInstanceState == null) {
             Fragment fragment = new Frag_menu();
-            getFragmentManager().beginTransaction()
+            getSupportFragmentManager().beginTransaction()
                     .add(R.id.fragWindow, fragment)  // tom container i layout
                     .commit();
         }
@@ -66,6 +67,15 @@ public class Activity_Main extends Activity {
 
     public void stopMediaPlayer() {
         if(mp != null) mp.stop();
+        mp = null;
+    }
+
+    public void pauseMediaPlayer() {
+        if(mp != null) mp.pause();
+    }
+
+    public void continueMediaPlayer() {
+        //mp.
     }
 
 
